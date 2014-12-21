@@ -1,0 +1,26 @@
+{
+    "appKeys": {},
+    "capabilities": [
+        ""
+    ],
+    "companyName": "@FilipLoster",
+    "longName": "KanaTeacher",
+    "projectType": "native",
+    "resources": {
+        "media": [
+            {
+                "file": "images/kana_ico.png",
+                "menuIcon": true,
+                "name": "kana_ico",
+                "type": "png"
+            }
+        ]
+    },
+    "shortName": "Kana",
+    "uuid": "79ebaf81-7968-4a3f-ac70-b832e5645ea2",
+    "versionCode": 1,
+    "versionLabel": "0.9",
+    "watchapp": {
+        "watchface": false
+    }
+}
