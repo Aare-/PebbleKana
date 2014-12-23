@@ -1,6 +1,8 @@
 #ifndef __SETTINGS_C__
 #define __SETTINGS_C__
 
+#include <pebble.h>
+
 /** OPTIONS **/
 // quiz types
 static const char* settings_quiz_types[] 

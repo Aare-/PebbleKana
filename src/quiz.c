@@ -1,6 +1,8 @@
 #ifndef __QUIZ_C__
 #define __QUIZ_C__
 
+#include <pebble.h>
+
 Window* quiz_window;  
   
 void quiz_window_load(Window* window) {

@@ -1,6 +1,8 @@
 #ifndef __ABOUT_C__
 #define __ABOUT_C__
   
+#include <pebble.h>
+  
 Window *about_window;
 TextLayer *about_text_layer;
   
