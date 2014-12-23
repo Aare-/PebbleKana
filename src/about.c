@@ -1,7 +1,5 @@
 #ifndef __ABOUT_C__
 #define __ABOUT_C__
-
-#include <pebble.h>
   
 Window *about_window;
 TextLayer *about_text_layer;
@@ -27,8 +25,8 @@ Window* about_window_create() {
       .load = about_window_load,
       .unload = about_window_unload
     });
+
   return about_window;
-  
 }
   
 #endif

@@ -1,17 +1,13 @@
 #ifndef __SETTINGS_C__
 #define __SETTINGS_C__
 
-#include <pebble.h>
-
 /** OPTIONS **/
 // quiz types
-static const int settings_quiz_types_num = 3;
-static char* settings_quiz_types[] 
+static const char* settings_quiz_types[] 
 	= {"hiragana", "katakana", "both"};
 
 // quiz types
-static const int settings_quiz_answers_num = 3;
-static char* settings_quiz_answers[] 
+static const char* settings_quiz_answers[] 
 	= {"question", "answer", "random"};
 
 static SimpleMenuItem settings_quiz_items [2];
@@ -20,19 +16,21 @@ static SimpleMenuSection settings_section [1];
 Window *settings_window;
 static SimpleMenuLayer *settings_main_layer; 
 
-static void settings_quiz_config_callback(int index, void *ctx) {
-	switch(index){
+static void settings_quiz_config_callback(int index, void *ctx) {	
+    /*
+    switch(index){
 		case 0:
 			
 			//layer_mark_dirty(settings_main_layer);
 			break;
-	}
+	} 
+    */
 }
 
 void settings_window_load(Window* window) {
-	  Layer *window_layer = window_get_root_layer(window);
+	Layer *window_layer = window_get_root_layer(window);
     GRect bounds = layer_get_frame(window_layer);
-
+ 
     int num_items = 0;
     settings_quiz_items[num_items++] = 
     	(SimpleMenuItem) 
@@ -70,12 +68,13 @@ void settings_window_unload(Window* window) {
 }
 
 Window* settings_window_create() {
-	  settings_window = window_create();    
+	settings_window = window_create();    
     window_set_window_handlers(settings_window, 
         (WindowHandlers) {
             .load = settings_window_load,
             .unload = settings_window_unload
         });  
+
     return settings_window;
 }
 
