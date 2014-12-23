@@ -15,7 +15,7 @@ static struct MainMenuUI {
     Window* window;
     SimpleMenuLayer* simple_menu_layer;
     SimpleMenuItem items [4];
-    SimpleMenuSection sections [1]
+    SimpleMenuSection sections [1];
 } ui;
 
 static void callback(int index, void *ctx) {
@@ -57,11 +57,29 @@ static void load(Window* window) {
 
     ui.simple_menu_layer
         = simple_menu_layer_create(bounds, window, ui.sections, num_sections, NULL);
-
+  
+    layer_add_child(window_layer, simple_menu_layer_get_layer(ui.simple_menu_layer));
 }
 
 static void unload(Window* window) {
     simple_menu_layer_destroy(ui.simple_menu_layer);
 }
 
-INIT(main_menu)
+void main_menu_init() {
+	  ui.window = window_create();
+		window_set_window_handlers(ui.window,
+	        (WindowHandlers) {
+	            .load = load,
+	            .unload = unload
+	        });
+  
+    main_menu_show();
+}
+
+void main_menu_show() {
+	  window_stack_push(ui.window, true);
+}
+
+void main_menu_deinit() {
+	  window_destroy(ui.window);
+}

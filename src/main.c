@@ -19,8 +19,7 @@ void deinit() {
 }
 
 int main(void) {     
-    init();
-    main_menu_show();
+    init();    
 
     app_event_loop();
 

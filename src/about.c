@@ -23,4 +23,19 @@ static void unload(Window* window) {
   
 }
 
-INIT(about)
+void about_init() {
+	  ui.window = window_create();
+		window_set_window_handlers(ui.window,
+	        (WindowHandlers) {
+	            .load = load,
+	            .unload = unload
+	        });
+}
+
+void about_show() {
+	  window_stack_push(ui.window, true);
+}
+
+void about_deinit() {
+	  window_destroy(ui.window);
+}

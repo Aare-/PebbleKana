@@ -4,7 +4,6 @@
 
 static struct SettingsUi {
     Window* window;
-
     SimpleMenuLayer *simple_menu_layer;
     SimpleMenuItem items[2];
     SimpleMenuSection sections[1];
@@ -59,4 +58,19 @@ static void unload(Window* window) {
 	simple_menu_layer_destroy(ui.simple_menu_layer);
 }
 
-INIT(settings)
+void settings_init() {
+	  ui.window = window_create();
+		window_set_window_handlers(ui.window,
+	        (WindowHandlers) {
+	            .load = load,
+	            .unload = unload
+	        });
+}
+
+void settings_show() {
+	  window_stack_push(ui.window, true);
+}
+
+void settings_deinit() {
+	  window_destroy(ui.window);
+}

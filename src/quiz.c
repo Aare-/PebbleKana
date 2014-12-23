@@ -14,4 +14,19 @@ static void unload(Window* window) {
   
 }
 
-INIT(quiz)
+void quiz_init() {
+	  ui.window = window_create();
+		window_set_window_handlers(ui.window,
+	        (WindowHandlers) {
+	            .load = load,
+	            .unload = unload
+	        });
+}
+
+void quiz_show() {
+	  window_stack_push(ui.window, true);
+}
+
+void quiz_deinit() {
+	  window_destroy(ui.window);
+}
