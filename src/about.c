@@ -2,7 +2,7 @@
 #define __ABOUT_C__
   
 #include <pebble.h>
-  
+
 Window *about_window;
 TextLayer *about_text_layer;
   
@@ -11,9 +11,9 @@ void about_window_load(Window* window) {
   GRect bounds = layer_get_frame(window_layer);
   
   about_text_layer = text_layer_create(bounds);
-  text_layer_set_text(about_text_layer, "Created by:\n@FilipLoster\n\n2014");
+  text_layer_set_text(about_text_layer, "Created by: @FilipLoster 2014");
   
-  layer_add_child(window_layer, (Layer*)about_text_layer); 
+  layer_add_child(window_layer, text_layer_get_layer(about_text_layer)); 
 }
 
 void about_window_unload(Window* window) {
