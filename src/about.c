@@ -18,7 +18,9 @@ static void load(Window* window) {
 }
 
 static void unload(Window* window) {
+
   text_layer_destroy(ui.text_layer);
+  
 }
 
 INIT(about)
