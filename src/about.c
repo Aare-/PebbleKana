@@ -11,8 +11,10 @@ static void load(Window* window) {
   Layer *window_layer = window_get_root_layer(window);
   GRect bounds = layer_get_frame(window_layer);
   
+  bounds.y = bounds.y + 20;
   ui.text_layer = text_layer_create(bounds);
   text_layer_set_text(ui.text_layer, "Created by: @FilipLoster 2014");
+  text_layer_set_alignment(ui.text_layer, GTextAlignmentCenter);
   
   layer_add_child(window_layer, text_layer_get_layer(ui.text_layer)); 
 }

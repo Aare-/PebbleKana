@@ -2,6 +2,7 @@
 #include "main_menu.h"
 #include "settings.h"
 #include "about.h"
+#include "learn.h"
 #include "common.h"
 
 #define MAIN_MENU_SECTION_ITEM(__TITLE__) \
@@ -20,19 +21,17 @@ static struct MainMenuUI {
 
 static void callback(int index, void *ctx) {
     switch(index){
-        case 0: //Start quiz
-
+        case 0:
+            quiz_show();
             break;
-        case 1: //Learn
-
+        case 1:
+            learn_show();
             break;
-        case 2: //Configure
+        case 2:
             settings_show();
-      
             break;
-        case 3: //About
-            about_show();
-      
+        case 3:
+            about_show();    
             break;
     }
 }
