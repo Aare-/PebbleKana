@@ -1,84 +1,62 @@
-#ifndef __SETTINGS_C__
-#define __SETTINGS_C__
-
 #include <pebble.h>
+#include "settings.h"
+#include "common.h"
 
-/** OPTIONS **/
-// quiz types
-static const char* settings_quiz_types[] 
+static struct SettingsUi {
+    Window* window;
+
+    SimpleMenuLayer *simple_menu_layer;
+    SimpleMenuItem items[2];
+    SimpleMenuSection sections[1];
+} ui;
+
+static const char* quiz_types[] 
 	= {"hiragana", "katakana", "both"};
-
-// quiz types
-static const char* settings_quiz_answers[] 
+static const char* quiz_answers[] 
 	= {"question", "answer", "random"};
 
-static SimpleMenuItem settings_quiz_items [2];
-static SimpleMenuSection settings_section [1];
-
-Window *settings_window;
-static SimpleMenuLayer *settings_main_layer; 
-
-static void settings_quiz_config_callback(int index, void *ctx) {	
-    /*
-    switch(index){
-		case 0:
-			
-			//layer_mark_dirty(settings_main_layer);
-			break;
-	} 
-    */
+static void callback(int index, void *ctx) {	
+    
 }
 
-void settings_window_load(Window* window) {
+static void load(Window* window) {
 	Layer *window_layer = window_get_root_layer(window);
     GRect bounds = layer_get_frame(window_layer);
  
     int num_items = 0;
-    settings_quiz_items[num_items++] = 
+    ui.items[num_items++] = 
     	(SimpleMenuItem) 
     	{
     		.title = "Test:",
-    		.subtitle = settings_quiz_types[0], //todo: get from storage
-    		.callback = settings_quiz_config_callback
+    		.subtitle = quiz_types[0], //todo: get from storage
+    		.callback = callback
     	};    
 
-    settings_quiz_items[num_items++] = 
+    ui.items[num_items++] = 
     	(SimpleMenuItem) 
     	{
     		.title = "Romaji as:",
-    		.subtitle = settings_quiz_answers[0], //todo: get from storage
-    		.callback = settings_quiz_config_callback
+    		.subtitle = quiz_answers[0], //todo: get from storage
+    		.callback = callback
     	};    
 
     int num_sections = 0;
-    settings_section[num_sections++] = 
+    ui.sections[num_sections++] = 
     	(SimpleMenuSection) 
     	{
     		.title = "Quiz settings:",
-    		.items = settings_quiz_items,
+    		.items = ui.items,
     		.num_items = num_items
     	};
 
-    settings_main_layer
-    	= simple_menu_layer_create(bounds, window, settings_section, num_sections, NULL);
+    ui.simple_menu_layer
+    	= simple_menu_layer_create(bounds, window, ui.sections, num_sections, NULL);
   
-    layer_add_child(window_layer, simple_menu_layer_get_layer(settings_main_layer));
+    layer_add_child(window_layer, simple_menu_layer_get_layer(ui.simple_menu_layer));
 }
 
-void settings_window_unload(Window* window) {
-	simple_menu_layer_destroy(settings_main_layer);
+static void unload(Window* window) {
+	simple_menu_layer_destroy(ui.simple_menu_layer);
 }
 
-Window* settings_window_create() {
-	settings_window = window_create();    
-    window_set_window_handlers(settings_window, 
-        (WindowHandlers) {
-            .load = settings_window_load,
-            .unload = settings_window_unload
-        });  
-
-    return settings_window;
-}
-
-#endif
-
+INIT(settings)
