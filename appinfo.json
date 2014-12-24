@@ -9,6 +9,111 @@
     "resources": {
         "media": [
             {
+                "file": "images/k_n.png",
+                "name": "K_N",
+                "type": "png"
+            },
+            {
+                "file": "images/k_wo.png",
+                "name": "K_WO",
+                "type": "png"
+            },
+            {
+                "file": "images/k_wa.png",
+                "name": "K_WA",
+                "type": "png"
+            },
+            {
+                "file": "images/k_ro.png",
+                "name": "K_RO",
+                "type": "png"
+            },
+            {
+                "file": "images/k_re.png",
+                "name": "K_RE",
+                "type": "png"
+            },
+            {
+                "file": "images/k_ru.png",
+                "name": "K_RU",
+                "type": "png"
+            },
+            {
+                "file": "images/k_ri.png",
+                "name": "K_RI",
+                "type": "png"
+            },
+            {
+                "file": "images/k_ra.png",
+                "name": "K_RA",
+                "type": "png"
+            },
+            {
+                "file": "images/k_yo.png",
+                "name": "K_YO",
+                "type": "png"
+            },
+            {
+                "file": "images/k_yu.png",
+                "name": "K_YU",
+                "type": "png"
+            },
+            {
+                "file": "images/k_ya.png",
+                "name": "K_YA",
+                "type": "png"
+            },
+            {
+                "file": "images/k_mo.png",
+                "name": "K_MO",
+                "type": "png"
+            },
+            {
+                "file": "images/k_me.png",
+                "name": "K_ME",
+                "type": "png"
+            },
+            {
+                "file": "images/k_mu.png",
+                "name": "K_MU",
+                "type": "png"
+            },
+            {
+                "file": "images/k_mi.png",
+                "name": "K_MI",
+                "type": "png"
+            },
+            {
+                "file": "images/k_ma.png",
+                "name": "K_MA",
+                "type": "png"
+            },
+            {
+                "file": "images/k_ho.png",
+                "name": "K_HO",
+                "type": "png"
+            },
+            {
+                "file": "images/k_he.png",
+                "name": "K_HE",
+                "type": "png"
+            },
+            {
+                "file": "images/k_fu.png",
+                "name": "K_FU",
+                "type": "png"
+            },
+            {
+                "file": "images/k_hi.png",
+                "name": "K_HI",
+                "type": "png"
+            },
+            {
+                "file": "images/k_ha.png",
+                "name": "K_HA",
+                "type": "png"
+            },
+            {
                 "file": "images/k_no.png",
                 "name": "K_NO",
                 "type": "png"
