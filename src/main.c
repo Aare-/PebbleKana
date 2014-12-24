@@ -22,6 +22,7 @@ void deinit() {
 }
 
 int main(void) {     
+    srand(time(NULL));
     init();    
 
     app_event_loop();

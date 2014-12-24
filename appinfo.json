@@ -9,9 +9,40 @@
     "resources": {
         "media": [
             {
+                "file": "images/k_i.png",
+                "name": "K_I",
+                "type": "png"
+            },
+            {
+                "characterRegex": "[A-Z]",
+                "file": "fonts/monster_50.ttf",
+                "name": "ROMAJI_50",
+                "type": "font"
+            },
+            {
                 "file": "images/kana_ico.png",
                 "menuIcon": true,
                 "name": "ICO",
+                "type": "png"
+            },
+            {
+                "file": "images/k_o.png",
+                "name": "K_O",
+                "type": "png"
+            },
+            {
+                "file": "images/k_e.png",
+                "name": "K_E",
+                "type": "png"
+            },
+            {
+                "file": "images/k_u.png",
+                "name": "K_U",
+                "type": "png"
+            },
+            {
+                "file": "images/k_a.png",
+                "name": "K_A",
                 "type": "png"
             }
         ]

@@ -2,6 +2,7 @@
 #include "main_menu.h"
 #include "settings.h"
 #include "about.h"
+#include "quiz.h"
 #include "learn.h"
 #include "common.h"
 
