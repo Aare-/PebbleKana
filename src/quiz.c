@@ -26,7 +26,7 @@ static void loadRandomAnswerOptions() {
     
     bool test = false;
     do{
-      answer[i][0] = rand() % 3; 
+      answer[i][0] = rand() % 5; 
       answer[i][1] = rand() % getCharCount(answer[i][0]);
       test = false;
       for(int j=0; j<i; j++)
@@ -106,7 +106,7 @@ static void unloadAnswerOptions() {
 
 static void load(Window* window) {  
     GFont custom_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_ROMAJI_50));
-    GRect bounds = GRect(25, 40, 80, 60);           
+    GRect bounds = GRect(10, 40, 100, 60);           
     ui.text = text_layer_create(bounds);
     text_layer_set_font(ui.text, custom_font);
     text_layer_set_text(ui.text, "");
