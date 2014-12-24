@@ -5,6 +5,7 @@
 static struct QuizUi {
 	Window* window;
 	ActionBarLayer *action_bar;
+  //Layer* timeProgress;
 
 	GBitmap *image_top;
 	GBitmap *image_middle;
@@ -19,8 +20,10 @@ static int answer[3][2];
 static bool enabled[3];
 static int correct;
 
-static void loadRandomAnswerOptions() {
-  
+static int timeLimit;
+static float timeLeft;
+
+static void loadRandomAnswerOptions() {  
   for(int i = 0; i < 3; i++) {        
     enabled[i] = true;
     
@@ -48,16 +51,15 @@ static void loadRandomAnswerOptions() {
 
 	action_bar_layer_set_icon(ui.action_bar, BUTTON_ID_UP,     ui.image_top);
 	action_bar_layer_set_icon(ui.action_bar, BUTTON_ID_SELECT, ui.image_middle);
-	action_bar_layer_set_icon(ui.action_bar, BUTTON_ID_DOWN,   ui.image_bottom);
-  
-  //layer_mark_dirty(window_get_root_layer(ui.window));
+	action_bar_layer_set_icon(ui.action_bar, BUTTON_ID_DOWN,   ui.image_bottom);    
 }
 
 static void click_up(ClickRecognizerRef recognizer, void *context) {
   if(correct != 0) {
     if(enabled[0]) {
       enabled[0] = false;
-      vibes_short_pulse();
+      if(persist_read_int(STORAGE_VIBRATIONS) == 0)
+        vibes_short_pulse();
       action_bar_layer_clear_icon(ui.action_bar, BUTTON_ID_UP);
     }
   } else {  
@@ -70,7 +72,8 @@ static void click_select(ClickRecognizerRef recognizer, void *context) {
   if(correct != 1) {
     if(enabled[1]){
       enabled[1] = false;
-      vibes_short_pulse();
+      if(persist_read_int(STORAGE_VIBRATIONS) == 0)
+        vibes_short_pulse();      
       action_bar_layer_clear_icon(ui.action_bar, BUTTON_ID_SELECT);
     }
   } else {  
@@ -83,7 +86,8 @@ static void click_down(ClickRecognizerRef recognizer, void *context) {
   if(correct != 2) {
     if(enabled[2]) {
       enabled[2] = false;
-      vibes_short_pulse();
+      if(persist_read_int(STORAGE_VIBRATIONS) == 0)
+        vibes_short_pulse();
       action_bar_layer_clear_icon(ui.action_bar, BUTTON_ID_DOWN);
     }
   } else {
@@ -104,7 +108,22 @@ static void unloadAnswerOptions() {
 	gbitmap_destroy(ui.image_bottom);
 }
 
+static void time_update(Layer *layer, GContext* ctx) {
+  //graphics_context_set_fill_color(ctx, GColorClear);  
+  //graphics_fill_rect(ctx, GRect(0, 0, 144, 20), 0, NULL);
+  //graphics_context_set_fill_color(ctx, GColorBlack);
+  //graphics_fill_rect(ctx, GRect(0, 0, (int)(144 * timeLeft), 20), 0, NULL);
+}
+
 static void load(Window* window) {  
+    switch(persist_read_int(STORAGE_TIME_LIMIT)){    
+      case 1: timeLimit = 10; break;
+      case 2: timeLimit = 5; break;
+      case 3: timeLimit = 2; break;
+      case 4: timeLimit = 1; break;
+      default: timeLimit = 0; break;
+    }
+  
     GFont custom_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_ROMAJI_50));
     GRect bounds = GRect(10, 40, 100, 60);           
     ui.text = text_layer_create(bounds);
@@ -114,12 +133,18 @@ static void load(Window* window) {
   
     layer_add_child(window_get_root_layer(window), text_layer_get_layer(ui.text)); 
   
+    /*ui.timeProgress = layer_create(GRect(0, 124, 144, 20));
+    layer_set_update_proc(timeProgress, time_update)    
+    layer_add_child(window_get_root_layer(window), timeProgress);
+    timeLeft = 0.0f;
+    layer_mark_dirty(ui.timeProgress);*/
+  
   	ui.action_bar = action_bar_layer_create();
   	action_bar_layer_add_to_window(ui.action_bar, window);
   	action_bar_layer_set_click_config_provider(
   		ui.action_bar,
-  		click_config_provider);
-
+  		click_config_provider);    
+  
   	loadRandomAnswerOptions();
 }
 
@@ -127,6 +152,7 @@ static void unload(Window* window) {
 	  unloadAnswerOptions();
   	action_bar_layer_destroy(ui.action_bar);
     text_layer_destroy(ui.text);
+    //layer_destroy(timeProgress);
 }
 
 void quiz_init() {

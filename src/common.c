@@ -28,6 +28,21 @@ static char * romaji[11][5] =
 	 {"WA", "WO",  "",    "",   ""},
 	 {"N", "", "", "", ""}};
 
+static char * rowsNames[11] = 
+  {
+   "A-",
+   "KA-",
+   "SA-",
+   "TA-",
+   "NA-",
+   "HA-",
+   "MA-",
+   "YA-",
+   "RA-",
+   "WA-",
+   "N"
+  };
+
 int getCharCount(int i) {
   return char_count[i];
 }
@@ -35,6 +50,10 @@ int getCharCount(int i) {
 int getKatakana(int i, int j) {
   return katakana[i][j];
 }
+
+char* getRowName(int i) {
+  return rowsNames[i];
+}  
 
  char* getRomaji(int i, int j) {
   return romaji[i][j];

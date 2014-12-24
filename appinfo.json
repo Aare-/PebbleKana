@@ -4,7 +4,7 @@
         ""
     ],
     "companyName": "@FilipLoster",
-    "longName": "KanaTeacher",
+    "longName": "Kana Teacher",
     "projectType": "native",
     "resources": {
         "media": [
@@ -252,7 +252,7 @@
             }
         ]
     },
-    "shortName": "Kana",
+    "shortName": "KanaTeacher",
     "uuid": "79ebaf81-7968-4a3f-ac70-b832e5645ea2",
     "versionCode": 1,
     "versionLabel": "0.9",

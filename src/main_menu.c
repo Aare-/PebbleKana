@@ -50,7 +50,7 @@ static void load(Window* window) {
     int num_sections = 0;
     ui.sections[num_sections++] = 
         (SimpleMenuSection) {
-            .title = "Kana Tuts v.0.9",
+            .title = "Kana Teacher v.0.1",
             .num_items = num_items,
             .items = ui.items
         };
