@@ -2,8 +2,10 @@
 #include "common.h"
   
 static const int char_count[] = {5, 5, 5, 5, 5, 5, 5, 3, 5, 2, 1};
-static const int katakana[1][5] = 
-	{{RESOURCE_ID_K_A, RESOURCE_ID_K_I, RESOURCE_ID_K_U, RESOURCE_ID_K_E, RESOURCE_ID_K_O}};
+static const int katakana[3][5] = 
+	{{RESOURCE_ID_K_A, RESOURCE_ID_K_I, RESOURCE_ID_K_U, RESOURCE_ID_K_E, RESOURCE_ID_K_O},
+   {RESOURCE_ID_K_KA, RESOURCE_ID_K_KI, RESOURCE_ID_K_KU, RESOURCE_ID_K_KE, RESOURCE_ID_K_KO},
+   {RESOURCE_ID_K_SA, RESOURCE_ID_K_SHI, RESOURCE_ID_K_SU, RESOURCE_ID_K_SE, RESOURCE_ID_K_SO}};
 	
 static char * romaji[11][5] = 
 	{{"A",  "I",   "U",   "E",  "O"},

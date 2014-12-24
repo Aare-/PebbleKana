@@ -26,7 +26,8 @@ static void loadRandomAnswerOptions() {
     
     bool test = false;
     do{
-      answer[i][0] = 0; answer[i][1] = rand() % 5;
+      answer[i][0] = rand() % 3; 
+      answer[i][1] = rand() % getCharCount(answer[i][0]);
       test = false;
       for(int j=0; j<i; j++)
         if(answer[i][0] == answer[j][0] && 

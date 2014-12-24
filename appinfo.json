@@ -9,6 +9,56 @@
     "resources": {
         "media": [
             {
+                "file": "images/k_so.png",
+                "name": "K_SO",
+                "type": "png"
+            },
+            {
+                "file": "images/k_se.png",
+                "name": "K_SE",
+                "type": "png"
+            },
+            {
+                "file": "images/k_su.png",
+                "name": "K_SU",
+                "type": "png"
+            },
+            {
+                "file": "images/k_shi.png",
+                "name": "K_SHI",
+                "type": "png"
+            },
+            {
+                "file": "images/k_sa.png",
+                "name": "K_SA",
+                "type": "png"
+            },
+            {
+                "file": "images/k_ko.png",
+                "name": "K_KO",
+                "type": "png"
+            },
+            {
+                "file": "images/k_ke.png",
+                "name": "K_KE",
+                "type": "png"
+            },
+            {
+                "file": "images/k_ku.png",
+                "name": "K_KU",
+                "type": "png"
+            },
+            {
+                "file": "images/k_ki.png",
+                "name": "K_KI",
+                "type": "png"
+            },
+            {
+                "file": "images/k_ka.png",
+                "name": "K_KA",
+                "type": "png"
+            },
+            {
                 "file": "images/k_i.png",
                 "name": "K_I",
                 "type": "png"
