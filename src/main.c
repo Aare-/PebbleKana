@@ -1,32 +1,31 @@
 #include <pebble.h>
-#include "main_menu.h"
-#include "quiz.h"
-#include "settings.h"
-#include "about.h"
-#include "learn.h"
+#include "kana_app_main_menu.h"
+//#include "kana_app_quiz.h"
+//#include "kana_app_settings.h"
+//#include "kana_app_about.h"
+//#include "kana_app_learn.h"
 
 void init() {
-    quiz_init();
-    settings_init();
-    about_init();
-    learn_init();
-    main_menu_init();
+    //kana_app_quiz_init();
+    //kana_app_settings_init();
+    //kana_app_about_init();
+    //kana_app_learn_init();
+    kana_app_main_menu_init();
 }
 
 void deinit() {  
-    main_menu_deinit();
-    quiz_deinit();
-    settings_deinit();
-    learn_deinit();
-    about_deinit();
+    kana_app_main_menu_deinit();
+    //kana_app_quiz_deinit();
+    //kana_app_settings_deinit();
+    //kana_app_learn_deinit();
+    //kana_app_about_deinit();
 }
 
 int main(void) {     
     srand(time(NULL));
+
     init();    
-
     app_event_loop();
-
     deinit();
     
     return 0;
