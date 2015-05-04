@@ -8,87 +8,113 @@
 #include "kana_app_common.h"
 */
 
-#define MAIN_MENU_SECTION_ITEM(__TITLE__) \
-    ui.items[num_items++] =\
-        (SimpleMenuItem) {\
-            .title = __TITLE__,\
-            .callback = callback\
-        };
+// - Start Quiz
+// - Learn
+// - - Hiragana
+// - - Katakana
+// - Settings
 
-static struct MainMenuUI {
-    Window* window;
-    SimpleMenuLayer* simple_menu_layer;
+static char * menu_labels[4] = 
+    {"Start Quiz", "Learn Hiragana", "Learn Katakana", "Settings"};
 
-    SimpleMenuItem items [5];
-    SimpleMenuSection sections [1];
-} ui;
+static MenuLayer* menu;
+static Window* main_window;
+static GBitmap* fuji;
 
-static void callback(int index, void *ctx) {
-    switch(index){
-        case 0:
-            //kana_app_quiz_show();
-            break;
-        case 1:
-            //kana_app_learn_show();
-            break;
-        case 2:
-            //kana_app_learn_show();
-            break;
-        case 3:
-            //kana_app_settings_show();
-            break;
-        case 4:
-            //kana_app_about_show();    
-            break;
+static uint16_t menu_callback_get_num_sections(MenuLayer *layer, void *data) {
+    return 1;
+}
+
+static uint16_t menu_callback_get_num_rows(MenuLayer *layer, uint16_t section, void *data) {
+    return 4;
+}
+
+static int16_t menu_callback_get_cell_height(MenuLayer *layer, MenuIndex* section, void *data) {
+    return 40;
+}
+
+
+static int16_t menu_callback_get_header_height(MenuLayer *layer, uint16_t index, void *data) {    
+    if(index == 0)
+        return 55;
+    return 0;
+}
+
+static void menu_callback_draw_row(GContext *ctx, const Layer *cell_layer, MenuIndex *cell_index, void *data) {    
+    menu_cell_basic_draw(ctx, cell_layer, menu_labels[cell_index->row], NULL, NULL);    
+}
+
+static void menu_callback_draw_header(GContext *ctx, const Layer *cell_layer, uint16_t secton_index, void *data) {    
+    if(secton_index == 0) {
+        GRect bounds = layer_get_frame(cell_layer);
+        graphics_draw_bitmap_in_rect(ctx, fuji, bounds);
     }
 }
+
+//static int16_t menu_callback_separator_height(MenuLayer *menu_layer, MenuIndex *cell_index, void *data) {
+//    return 0;
+//}
+
+//static void menu_callback_select_click(MenuLayer *layer, MenuIndex *cell_index){
+
+//}
+ 
 
 static void load(Window* window) {
     Layer *window_layer = window_get_root_layer(window);
     GRect bounds = layer_get_frame(window_layer);
 
-    int num_items = 0;    
-    MAIN_MENU_SECTION_ITEM("Start Quiz")
-    MAIN_MENU_SECTION_ITEM("Learn Hiragana")
-    MAIN_MENU_SECTION_ITEM("Learn Katakana")
-    MAIN_MENU_SECTION_ITEM("Configure")
-    MAIN_MENU_SECTION_ITEM("About")
+    //TODO: handle old pebble
+    fuji = gbitmap_create_with_resource(RESOURCE_ID_FUJI);
 
-    int num_sections = 0;
-    ui.sections[num_sections++] = 
-        (SimpleMenuSection) {
-            .title = "Kana Teacher v.0.1",
-            .num_items = num_items,
-            .items = ui.items
-        };
+    menu = menu_layer_create(bounds);
+    menu_layer_set_callbacks(menu, NULL,
+        (MenuLayerCallbacks) {
+            .get_num_sections = menu_callback_get_num_sections,
+            .get_num_rows = menu_callback_get_num_rows,
 
-    ui.simple_menu_layer
-        = simple_menu_layer_create(bounds, window, ui.sections, num_sections, NULL);
-  
-    layer_add_child(window_layer, simple_menu_layer_get_layer(ui.simple_menu_layer));
+            .get_cell_height = menu_callback_get_cell_height,
+            .get_header_height = menu_callback_get_header_height,            
+
+            .draw_row = menu_callback_draw_row,
+            .draw_header = menu_callback_draw_header,
+
+            //.get_separator_height = menu_callback_separator_height
+
+            //.select_click = menu_callback_select_click
+        });
+
+    #ifdef PBL_COLOR
+        menu_layer_set_normal_colors(menu, GColorVeryLightBlue, GColorRichBrilliantLavender);
+        menu_layer_set_highlight_colors(menu, GColorRichBrilliantLavender, GColorWhite);
+    #else
+
+    #endif
+
+    menu_layer_set_click_config_onto_window(menu, window);
+    layer_add_child(window_layer, menu_layer_get_layer(menu));
 }
 
 static void unload(Window* window) {
-    simple_menu_layer_destroy(ui.simple_menu_layer);
+    menu_layer_destroy(menu);
 }
 
 // public interface
 
 void kana_app_main_menu_init() {
-	ui.window = 
-        window_create();
-		    window_set_window_handlers(ui.window,
-	            (WindowHandlers) 
-                {
-	                .load = load,
-	                .unload = unload
-	            });      
+	main_window = window_create();
+    window_set_window_handlers(main_window,
+        (WindowHandlers) 
+        {
+            .load = load,
+            .unload = unload
+        });      
 }
 
 void kana_app_main_menu_show() {
-	  window_stack_push(ui.window, true);
+	  window_stack_push(main_window, true);
 }
 
 void kana_app_main_menu_deinit() {
-	  window_destroy(ui.window);
+	  window_destroy(main_window);
 }

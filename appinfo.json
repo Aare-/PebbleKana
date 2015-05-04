@@ -19,6 +19,11 @@
   "sdkVersion": "3",
   
   "resources": {
-    "media": []
+    "media": [
+      {
+        "type": "png",
+        "name": "FUJI",
+        "file": "fuji.png"
+      }]
   }
 }
