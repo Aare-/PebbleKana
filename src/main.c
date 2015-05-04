@@ -25,6 +25,8 @@ int main(void) {
     srand(time(NULL));
 
     init();    
+    kana_app_main_menu_show();
+
     app_event_loop();
     deinit();
     
