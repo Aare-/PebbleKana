@@ -1,3 +1,50 @@
+#include <pebble.h>
+#include "kana_app_learn.h"
+#include "kana_app_resources.h"
+#include "kana_app_simple_menu_color.h"
+
+static struct SimpleColorMenuLayer *simpleMenu;
+static Window* main_window;
+
+#define NUM_SECTIONS 3
+static char *cellItemTitles[] = 
+  {"Test 1", "Test 2", "Test 3"};
+static char *cellItemSubtitles[] =
+  {"Sub 1", "Sub 2", NULL};
+
+void menu_callback_click(MenuLayer* layer, MenuIndex* index, void* data) {
+
+}
+
+void kana_app_learn_init() {
+  main_window = window_create();
+
+  simpleMenu = kana_app_simple_menu_init(
+    main_window,
+    "test",
+    NUM_SECTIONS,
+    cellItemTitles,
+    cellItemSubtitles,
+    menu_callback_click
+  );
+
+  #ifdef PBL_COLOR
+  kana_app_simple_menu_set_color(
+    simpleMenu,
+    GColorLiberty, GColorRichBrilliantLavender,
+    GColorRichBrilliantLavender, GColorWhite);
+  #endif
+}
+
+void kana_app_learn_show() {
+  window_stack_push(main_window, true);
+}
+
+void kana_app_learn_deinit() {
+  window_destroy(main_window);
+  free(simpleMenu);
+}
+
 /*
 #include <pebble.h>
 #include "learn.h"

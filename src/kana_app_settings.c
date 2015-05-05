@@ -1,6 +1,7 @@
 #include <pebble.h>
 #include "kana_app_settings.h"
 #include "kana_app_resources.h"
+#include "kana_app_simple_menu_color.h"
 
 #define LIST_ITEMS_LEN 5
 

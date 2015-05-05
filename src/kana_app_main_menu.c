@@ -1,12 +1,10 @@
 #include <pebble.h>
 #include "kana_app_main_menu.h"
 #include "kana_app_settings.h"
+#include "kana_app_learn.h"
 
 /*
-#include "kana_app_about.h"
 #include "kana_app_quiz.h"
-#include "kana_app_learn.h"
-#include "kana_app_common.h"
 */
 
 // - Start Quiz
@@ -54,10 +52,16 @@ static void menu_callback_draw_header(GContext *ctx, const Layer *cell_layer, ui
     }
 }
 
-static void menu_callback_select_click(MenuLayer *layer, MenuIndex *cell_index, void *data){
+static void menu_callback_select_click(MenuLayer* layer, MenuIndex* cell_index, void* data){
     switch(cell_index->section) {
         case 0:
             switch(cell_index->row) {
+                case 1:
+                    kana_app_learn_show();
+                    break;
+                case 2:
+                    kana_app_learn_show();
+                    break;
                 case 4:
                     kana_app_settings_show();
                     break;
@@ -96,7 +100,7 @@ static void load(Window* window) {
     #endif
 
     menu_layer_set_click_config_onto_window(menu, window);
-    layer_add_child(window_layer, menu_layer_get_layer(menu));
+    layer_add_child(window_get_root_layer(window), menu_layer_get_layer(menu));
 }
 
 static void unload(Window* window) {
