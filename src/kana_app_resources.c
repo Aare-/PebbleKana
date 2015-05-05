@@ -1,10 +1,8 @@
-/*
-#pragma once
-
 #include <pebble.h>
 #include "kana_app_resources.h"
   
 static const int char_count[] = {5, 5, 5, 5, 5, 5, 5, 3, 5, 2, 1};
+/*
 static const int katakana[11][5] = 
 	{{RESOURCE_ID_K_A,  RESOURCE_ID_K_I,   RESOURCE_ID_K_U,   RESOURCE_ID_K_E,  RESOURCE_ID_K_O},
    {RESOURCE_ID_K_KA, RESOURCE_ID_K_KI,  RESOURCE_ID_K_KU,  RESOURCE_ID_K_KE, RESOURCE_ID_K_KO},
@@ -29,6 +27,7 @@ static const int hiragana[11][5] =
    {RESOURCE_ID_H_RA, RESOURCE_ID_H_RI,  RESOURCE_ID_H_RU,  RESOURCE_ID_H_RE, RESOURCE_ID_H_RO},
    {RESOURCE_ID_H_WA, RESOURCE_ID_H_WO, 0, 0, 0},
    {RESOURCE_ID_H_N, 0, 0, 0, 0}};   
+   */
 	
 static char * romaji[11][5] = 
 	{{"A",  "I",   "U",   "E",  "O"},
@@ -60,9 +59,9 @@ static char * rowsNames[11] =
 
 // public interface
 
-GDrawCommandImage *kana_app_resources_get_icon(int resourceId) {
-  return gdraw_command_image_create_with_resource(resourceId);
-}
+//GDrawCommandImage *kana_app_resources_get_icon(int resourceId) {
+//  return gdraw_command_image_create_with_resource(resourceId);
+//}
 
 
 int kana_app_getCharCount(int i) {
@@ -70,11 +69,11 @@ int kana_app_getCharCount(int i) {
 }
 
 int kana_app_getKatakana(int i, int j) {
-  return katakana[i][j];
+  return -1;//katakana[i][j];
 }
 
 int kana_app_getHiragana(int i, int j) {
-  return hiragana[i][j];
+  return -1;//hiragana[i][j];
 }
 
 char* kana_app_getRowName(int i) {
@@ -84,5 +83,3 @@ char* kana_app_getRowName(int i) {
 char* kana_app_getRomaji(int i, int j) {
   return romaji[i][j];
 }
-
-*/

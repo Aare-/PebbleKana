@@ -1,7 +1,8 @@
 #include <pebble.h>
 #include "kana_app_main_menu.h"
-/*
 #include "kana_app_settings.h"
+
+/*
 #include "kana_app_about.h"
 #include "kana_app_quiz.h"
 #include "kana_app_learn.h"
@@ -14,8 +15,10 @@
 // - - Katakana
 // - Settings
 
-static char * menu_labels[4] = 
-    {"Start Quiz", "Learn Hiragana", "Learn Katakana", "Settings"};
+#define MENU_ITEMS_LEN 5
+
+static char * menu_labels[MENU_ITEMS_LEN] = 
+    {"Start Quiz", "Learn Hiragana", "Learn Katakana", "Statistics", "Settings"};
 
 static MenuLayer* menu;
 static Window* main_window;
@@ -26,7 +29,7 @@ static uint16_t menu_callback_get_num_sections(MenuLayer *layer, void *data) {
 }
 
 static uint16_t menu_callback_get_num_rows(MenuLayer *layer, uint16_t section, void *data) {
-    return 4;
+    return MENU_ITEMS_LEN;
 }
 
 static int16_t menu_callback_get_cell_height(MenuLayer *layer, MenuIndex* section, void *data) {
@@ -51,14 +54,17 @@ static void menu_callback_draw_header(GContext *ctx, const Layer *cell_layer, ui
     }
 }
 
-//static int16_t menu_callback_separator_height(MenuLayer *menu_layer, MenuIndex *cell_index, void *data) {
-//    return 0;
-//}
-
-//static void menu_callback_select_click(MenuLayer *layer, MenuIndex *cell_index){
-
-//}
- 
+static void menu_callback_select_click(MenuLayer *layer, MenuIndex *cell_index, void *data){
+    switch(cell_index->section) {
+        case 0:
+            switch(cell_index->row) {
+                case 4:
+                    kana_app_settings_show();
+                    break;
+            }
+            break;
+    }
+}
 
 static void load(Window* window) {
     Layer *window_layer = window_get_root_layer(window);
@@ -79,9 +85,7 @@ static void load(Window* window) {
             .draw_row = menu_callback_draw_row,
             .draw_header = menu_callback_draw_header,
 
-            //.get_separator_height = menu_callback_separator_height
-
-            //.select_click = menu_callback_select_click
+            .select_click = menu_callback_select_click
         });
 
     #ifdef PBL_COLOR
