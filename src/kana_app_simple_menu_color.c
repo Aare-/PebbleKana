@@ -30,7 +30,8 @@ static void mc_draw_row(GContext *ctx, const Layer *cell_layer, MenuIndex *cell_
     	ctx, 
     	cell_layer,     	
     	(layerData->cellItemsTitle)[cell_index->row], 
-    	(layerData->cellItemsSubtitle)[cell_index->row], 
+    	(layerData->cellItemsSubtitle) == NULL ? 
+            NULL : (layerData->cellItemsSubtitle)[cell_index->row], 
     	NULL);    
 }
 

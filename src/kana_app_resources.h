@@ -2,9 +2,11 @@
 
 #include <pebble.h>
 
-#define STORAGE_VIBRATIONS 1
-#define STORAGE_TIME_LIMIT 2
-#define STORAGE_QUIZ_TYPE 3
+#define SETTINGS_STORAGE 1
+#define ALPHABET_ROW_NUM 11
+
+extern char *kana_app_rows_names[ALPHABET_ROW_NUM];
+extern char *kana_app_romaji[ALPHABET_ROW_NUM][5];
   
 //GDrawCommandImage *kana_app_resources_get_icon(int icon);
 int kana_app_getCharCount(int i);

@@ -2,115 +2,77 @@
 #include "kana_app_settings.h"
 #include "kana_app_resources.h"
 #include "kana_app_simple_menu_color.h"
+#include "kana_app_simple_menu_color.h"
 
-#define LIST_ITEMS_LEN 5
+static struct SimpleColorMenuLayer *simpleMenu;
 
-#define ADD_MENU_ITEM(TITLE, SUBTITLE) \
-    ui.items[num_items++] = \
-        (SimpleMenuItem) \
-        { \
-            .title = TITLE, \
-            .subtitle = SUBTITLE, \
-            .callback = callback \
-        };    
-#define ROTATE_OPTIONS(VARIABLE, OPTION_ID, OPTIONS, OPTIONS_LEN) \
-    persist_write_int(VARIABLE, (persist_read_int(VARIABLE) + 1) % OPTIONS_LEN); \
-    ui.items[OPTION_ID].subtitle = OPTIONS[persist_read_int(VARIABLE)];      
+#define LIST_TITLES_LEN 5
 
-static struct SettingsUi {
-    Window* window;
-    SimpleMenuLayer *simple_menu_layer;
-    SimpleMenuItem items[LIST_ITEMS_LEN];
-    SimpleMenuSection sections[1];
-} ui;
+static char* setting_cell_titles[LIST_TITLES_LEN]
+    = {"Vibrations?", "Quiz type", "Time Limit?", "Reset stats?", "Credits"};
+static char* setting_cell_sel_subtitles[LIST_TITLES_LEN];
 
+static int setting_subtitles_len[LIST_TITLES_LEN] = 
+    {2, 3, 5, 1, 1};
 
-#define QUIZ_VIBRATIONS_OPTIONS_LEN 2
-static const char* quiz_vibrations[] 
-	= {"yes, please", "no, thanks"};
-#define QUIZ_TYPE_LEN 3
-static const char* quiz_type[] 
-    = {"only hiragana", "only katakana", "both"};
-#define QUIZ_TIME_LIMIT_OPTIONS_LEN 5
-static const char* quiz_time_limit[]
-    = {"no limit", "20s", "15s", "10s", "5s"};
+static char* setting_cell_subtitles [LIST_TITLES_LEN][5] =
+    {
+     {"yes, please", "no, thanks", "", "", ""},
+     {"only hiragana", "only katakana", "both", "", ""},
+     {"no limit", "20s", "15s", "10s", "5s"},
+     {"Learn from scratch", "", "", "", ""},
+     {"@FilipLoster 2015", "", "", "", ""}
+    };
 
-static void callback(int index, void *ctx) {	
-    switch(index){
-        case 0:
-            ROTATE_OPTIONS(STORAGE_VIBRATIONS, 0, quiz_vibrations, QUIZ_VIBRATIONS_OPTIONS_LEN)
-            break;
-        case 1:            
-            ROTATE_OPTIONS(STORAGE_QUIZ_TYPE, 1, quiz_type, QUIZ_TYPE_LEN)
-            break;
-        case 2:
-            ROTATE_OPTIONS(STORAGE_TIME_LIMIT, 2, quiz_time_limit, QUIZ_TIME_LIMIT_OPTIONS_LEN)
-            break;
-        case 3:
+static void menu_rotate_option(int position) {
+    int storPosition = SETTINGS_STORAGE + position;
+    int prevValue = persist_exists(storPosition) ? 
+        persist_read_int(storPosition) : 0;
 
-            break;
-    }
-  
-    layer_mark_dirty(simple_menu_layer_get_layer(ui.simple_menu_layer));
+    persist_write_int( storPosition, (prevValue + 1) % setting_subtitles_len[position]);
 }
 
-static void load(Window* window) {
-	Layer *window_layer = window_get_root_layer(window);
-    GRect bounds = layer_get_frame(window_layer);
- 
-    int num_items = 0;        
-    
-    ADD_MENU_ITEM(
-        "Vibrations?",
-        quiz_vibrations[persist_read_int(STORAGE_VIBRATIONS)])
-    ADD_MENU_ITEM(
-        "Quiz type",
-        quiz_type[persist_read_int(STORAGE_QUIZ_TYPE)])
-    ADD_MENU_ITEM(
-        "Time Limit?",
-        quiz_time_limit[persist_read_int(STORAGE_TIME_LIMIT)])
-    ADD_MENU_ITEM(
-        "Reset stats?", 
-        "Learn from scratch")
-    ADD_MENU_ITEM(
-        "Credits",
-        "@FilipLoster 2015"
-        )
+static char* menu_get_option(int position) {
+    int storPosition = SETTINGS_STORAGE + position;
+    int actPos = persist_exists(storPosition) ? persist_read_int(storPosition) % setting_subtitles_len[position] : 0;
 
-    int num_sections = 0;
-    ui.sections[num_sections++] = 
-    	(SimpleMenuSection) 
-    	{
-    		.title = "Quiz settings:",
-    		.items = ui.items,
-    		.num_items = num_items
-    	};
-
-    ui.simple_menu_layer
-    	= simple_menu_layer_create(bounds, window, ui.sections, num_sections, NULL);
-  
-    layer_add_child(window_layer, simple_menu_layer_get_layer(ui.simple_menu_layer));
+    return setting_cell_subtitles[position][actPos];
 }
 
-static void unload(Window* window) {
-	simple_menu_layer_destroy(ui.simple_menu_layer);
+static void menu_callback_click(MenuLayer* layer, MenuIndex* index, void* data) {
+    menu_rotate_option(index->row);
+    (simpleMenu->cellItemsSubtitle)[index->row] = menu_get_option(index->row);
+    layer_mark_dirty(menu_layer_get_layer(simpleMenu->menuLayer));
 }
 
 // public interface
 
-void kana_app_settings_init() {
-	  ui.window = window_create();
-		window_set_window_handlers(ui.window,
-	        (WindowHandlers) {
-	            .load = load,
-	            .unload = unload
-	        });
+void kana_app_settings_init() {	
+    for(int i=0; i < LIST_TITLES_LEN; i++)
+        setting_cell_sel_subtitles[i] = menu_get_option(i);
+
+    simpleMenu = kana_app_simple_menu_init(
+        window_create(),
+        "Settings",
+        LIST_TITLES_LEN,
+        setting_cell_titles,
+        setting_cell_sel_subtitles,
+        menu_callback_click
+      );
+
+    #ifdef PBL_COLOR
+    kana_app_simple_menu_set_color(
+        simpleMenu,
+        GColorLiberty, GColorRichBrilliantLavender,
+        GColorRichBrilliantLavender, GColorWhite);
+    #endif
 }
 
 void kana_app_settings_show() {
-	  window_stack_push(ui.window, true);
+	window_stack_push(simpleMenu->window, true);
 }
 
 void kana_app_settings_deinit() {
-	  window_destroy(ui.window);
+    window_destroy(simpleMenu->window);
+    free(simpleMenu);
 }

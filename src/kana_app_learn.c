@@ -4,27 +4,22 @@
 #include "kana_app_simple_menu_color.h"
 
 static struct SimpleColorMenuLayer *simpleMenu;
-static Window* main_window;
 
-#define NUM_SECTIONS 3
-static char *cellItemTitles[] = 
-  {"Test 1", "Test 2", "Test 3"};
-static char *cellItemSubtitles[] =
-  {"Sub 1", "Sub 2", NULL};
-
-void menu_callback_click(MenuLayer* layer, MenuIndex* index, void* data) {
+static void menu_callback_click(MenuLayer* layer, MenuIndex* index, void* data) {
 
 }
 
-void kana_app_learn_init() {
-  main_window = window_create();
+// public interface
 
+kana_app_learn_mode_type kana_app_act_learn_mode = HIRAGANA;
+
+void kana_app_learn_init() {
   simpleMenu = kana_app_simple_menu_init(
-    main_window,
-    "test",
-    NUM_SECTIONS,
-    cellItemTitles,
-    cellItemSubtitles,
+    window_create(),
+    "",
+    ALPHABET_ROW_NUM,
+    kana_app_rows_names,
+    NULL,
     menu_callback_click
   );
 
@@ -37,11 +32,19 @@ void kana_app_learn_init() {
 }
 
 void kana_app_learn_show() {
-  window_stack_push(main_window, true);
+  switch(kana_app_act_learn_mode) {
+    case HIRAGANA:
+      simpleMenu->title = "Hiragana";
+      break;
+    case KATAKANA:
+      simpleMenu->title = "Katakana";
+      break;
+  }
+  window_stack_push(simpleMenu->window, true);
 }
 
 void kana_app_learn_deinit() {
-  window_destroy(main_window);
+  window_destroy(simpleMenu->window);
   free(simpleMenu);
 }
 

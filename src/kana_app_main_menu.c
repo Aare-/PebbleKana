@@ -57,9 +57,11 @@ static void menu_callback_select_click(MenuLayer* layer, MenuIndex* cell_index, 
         case 0:
             switch(cell_index->row) {
                 case 1:
+                    kana_app_act_learn_mode = HIRAGANA;
                     kana_app_learn_show();
                     break;
                 case 2:
+                    kana_app_act_learn_mode = KATAKANA;
                     kana_app_learn_show();
                     break;
                 case 4:

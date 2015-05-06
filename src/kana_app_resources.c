@@ -1,7 +1,8 @@
 #include <pebble.h>
 #include "kana_app_resources.h"
   
-static const int char_count[] = {5, 5, 5, 5, 5, 5, 5, 3, 5, 2, 1};
+static const int char_count[ALPHABET_ROW_NUM] 
+  = {5, 5, 5, 5, 5, 5, 5, 3, 5, 2, 1};
 /*
 static const int katakana[11][5] = 
 	{{RESOURCE_ID_K_A,  RESOURCE_ID_K_I,   RESOURCE_ID_K_U,   RESOURCE_ID_K_E,  RESOURCE_ID_K_O},
@@ -28,21 +29,14 @@ static const int hiragana[11][5] =
    {RESOURCE_ID_H_WA, RESOURCE_ID_H_WO, 0, 0, 0},
    {RESOURCE_ID_H_N, 0, 0, 0, 0}};   
    */
-	
-static char * romaji[11][5] = 
-	{{"A",  "I",   "U",   "E",  "O"},
-	 {"KA", "KI",  "KU",  "KE", "KO"},
-	 {"SA", "SI",  "SU",  "SE", "SO"},
-	 {"TA", "CHI", "TSU", "TE", "TO"},	 
-	 {"NA", "NI",  "NU",  "NE", "NO"},	 
-	 {"HA", "HI",  "FU",  "HE", "HO"},
-	 {"MA", "MI",  "MU",  "ME", "MO"},
-	 {"YA", "YU",  "YO",  "",   ""},
-	 {"RA", "RI",  "RU",  "RE", "RO"},
-	 {"WA", "WO",  "",    "",   ""},
-	 {"N", "", "", "", ""}};
 
-static char * rowsNames[11] = 
+// public interface
+
+//GDrawCommandImage *kana_app_resources_get_icon(int resourceId) {
+//  return gdraw_command_image_create_with_resource(resourceId);
+//}
+
+char *kana_app_rows_names[ALPHABET_ROW_NUM] = 
   {
    "A-",
    "KA-",
@@ -57,11 +51,18 @@ static char * rowsNames[11] =
    "N"
   };
 
-// public interface
-
-//GDrawCommandImage *kana_app_resources_get_icon(int resourceId) {
-//  return gdraw_command_image_create_with_resource(resourceId);
-//}
+char *kana_app_romaji[ALPHABET_ROW_NUM][5] = 
+  {{"A",  "I",   "U",   "E",  "O"},
+   {"KA", "KI",  "KU",  "KE", "KO"},
+   {"SA", "SI",  "SU",  "SE", "SO"},
+   {"TA", "CHI", "TSU", "TE", "TO"},   
+   {"NA", "NI",  "NU",  "NE", "NO"},   
+   {"HA", "HI",  "FU",  "HE", "HO"},
+   {"MA", "MI",  "MU",  "ME", "MO"},
+   {"YA", "YU",  "YO",  "",   ""},
+   {"RA", "RI",  "RU",  "RE", "RO"},
+   {"WA", "WO",  "",    "",   ""},
+   {"N", "", "", "", ""}};
 
 
 int kana_app_getCharCount(int i) {
@@ -77,9 +78,9 @@ int kana_app_getHiragana(int i, int j) {
 }
 
 char* kana_app_getRowName(int i) {
-  return rowsNames[i];
+  return kana_app_rows_names[i];
 }  
 
 char* kana_app_getRomaji(int i, int j) {
-  return romaji[i][j];
+  return kana_app_romaji[i][j];
 }
