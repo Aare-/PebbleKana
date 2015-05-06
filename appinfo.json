@@ -24,6 +24,33 @@
         "type": "png",
         "name": "FUJI",
         "file": "fuji.png"
-      }]
+      },
+      
+      {
+        "type": "raw",
+        "name": "KANA_A",
+        "file": "dc_katakana/kt_a.pdc"
+      },
+      {
+        "type": "raw",
+        "name": "KANA_I",
+        "file": "dc_katakana/kt_i.pdc"
+      },
+      {
+        "type": "raw",
+        "name": "KANA_U",
+        "file": "dc_katakana/kt_u.pdc"
+      },
+      {
+        "type": "raw",
+        "name": "KANA_E",
+        "file": "dc_katakana/kt_e.pdc"
+      },
+      {
+        "type": "raw",
+        "name": "KANA_O",
+        "file": "dc_katakana/kt_o.pdc"
+      }
+    ]
   }
 }

@@ -2,10 +2,8 @@
 #include "kana_app_main_menu.h"
 #include "kana_app_settings.h"
 #include "kana_app_learn.h"
-
-/*
 #include "kana_app_quiz.h"
-*/
+#include "kana_app_stats.h"
 
 // - Start Quiz
 // - Learn
@@ -56,6 +54,9 @@ static void menu_callback_select_click(MenuLayer* layer, MenuIndex* cell_index, 
     switch(cell_index->section) {
         case 0:
             switch(cell_index->row) {
+                case 0:
+                    kana_app_quiz_show();
+                    break;
                 case 1:
                     kana_app_act_learn_mode = HIRAGANA;
                     kana_app_learn_show();
@@ -63,6 +64,9 @@ static void menu_callback_select_click(MenuLayer* layer, MenuIndex* cell_index, 
                 case 2:
                     kana_app_act_learn_mode = KATAKANA;
                     kana_app_learn_show();
+                    break;
+                case 3:
+                    kana_app_stats_show();
                     break;
                 case 4:
                     kana_app_settings_show();

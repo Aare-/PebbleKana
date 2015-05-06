@@ -1,8 +1,39 @@
-/*
 #include <pebble.h>
 #include "kana_app_quiz.h"
 #include "kana_app_resources.h"
 
+static struct Ui {
+  Window* window;
+  
+  TextLayer* text;
+} ui;
+
+static void load(Window* window) {  
+    
+}
+
+static void unload(Window* window) {
+    
+}
+
+void kana_app_quiz_init() {
+  ui.window = window_create();
+  window_set_window_handlers(ui.window,
+        (WindowHandlers) {
+            .load = load,
+            .unload = unload
+        });
+}
+
+void kana_app_quiz_show() {
+  window_stack_push(ui.window, true);
+}
+
+void kana_app_quiz_deinit() {
+  window_destroy(ui.window);
+}
+
+/*
 static struct QuizUi {
 	Window* window;
 	ActionBarLayer *action_bar;
@@ -164,5 +195,4 @@ void kana_app_quiz_show() {
 void kana_app_quiz_deinit() {
 	  window_destroy(ui.window);
 }
-
 */
