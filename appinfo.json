@@ -13,7 +13,6 @@
     "watchface": false
   },
   "targetPlatforms": [
-    "aplite",
     "basalt"
   ],
   "sdkVersion": "3",
@@ -28,28 +27,34 @@
       
       {
         "type": "raw",
-        "name": "KANA_A",
+        "name": "PDC_KANA_A",
         "file": "dc_katakana/kt_a.pdc"
       },
       {
         "type": "raw",
-        "name": "KANA_I",
+        "name": "PDC_KANA_I",
         "file": "dc_katakana/kt_i.pdc"
       },
       {
         "type": "raw",
-        "name": "KANA_U",
+        "name": "PDC_KANA_U",
         "file": "dc_katakana/kt_u.pdc"
       },
       {
         "type": "raw",
-        "name": "KANA_E",
+        "name": "PDC_KANA_E",
         "file": "dc_katakana/kt_e.pdc"
       },
       {
         "type": "raw",
-        "name": "KANA_O",
+        "name": "PDC_KANA_O",
         "file": "dc_katakana/kt_o.pdc"
+      },
+
+      {
+        "type": "raw",
+        "name": "PDC_TEST",
+        "file": "dc_katakana/test.pdc"
       }
     ]
   }

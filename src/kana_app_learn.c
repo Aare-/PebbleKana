@@ -26,7 +26,7 @@ void kana_app_learn_init() {
   #ifdef PBL_COLOR
   kana_app_simple_menu_set_color(
     simpleMenu,
-    GColorLiberty, GColorRichBrilliantLavender,
+    GColorVeryLightBlue, GColorRichBrilliantLavender,
     GColorRichBrilliantLavender, GColorWhite);
   #endif
 }

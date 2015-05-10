@@ -30,6 +30,14 @@ static const int hiragana[11][5] =
    {RESOURCE_ID_H_N, 0, 0, 0, 0}};   
    */
 
+static const int katakana_pdc[11][5] =
+  {{RESOURCE_ID_PDC_KANA_A, RESOURCE_ID_PDC_KANA_I, RESOURCE_ID_PDC_KANA_U, RESOURCE_ID_PDC_KANA_E, RESOURCE_ID_PDC_KANA_O},
+   {0, 0, 0, 0, 0},
+   {0, 0, 0, 0, 0},
+   {0, 0, 0, 0, 0},
+   {0, 0, 0, 0, 0}};
+
+
 // public interface
 
 //GDrawCommandImage *kana_app_resources_get_icon(int resourceId) {
@@ -64,13 +72,16 @@ char *kana_app_romaji[ALPHABET_ROW_NUM][5] =
    {"WA", "WO",  "",    "",   ""},
    {"N", "", "", "", ""}};
 
+GDrawCommandImage *kana_app_getPDCIcon(int resourceId) {
+  return gdraw_command_image_create_with_resource(resourceId);
+}
 
 int kana_app_getCharCount(int i) {
   return char_count[i];
 }
 
 int kana_app_getKatakana(int i, int j) {
-  return -1;//katakana[i][j];
+  return katakana_pdc[i][j];
 }
 
 int kana_app_getHiragana(int i, int j) {
