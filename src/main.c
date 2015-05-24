@@ -1,4 +1,5 @@
 #include <pebble.h>
+#include "kana_app_glyphs.h"
 #include "kana_app_main_menu.h"
 #include "kana_app_quiz.h"
 #include "kana_app_settings.h"
@@ -6,6 +7,8 @@
 #include "kana_app_stats.h"
 
 void init() {
+    kana_app_glyphs_init();
+    
     kana_app_quiz_init();
     kana_app_learn_init();
     kana_app_settings_init();

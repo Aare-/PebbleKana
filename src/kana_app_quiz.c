@@ -1,6 +1,7 @@
 #include <pebble.h>
 #include "kana_app_quiz.h"
 #include "kana_app_resources.h"
+#include "kana_app_glyphs.h"
 
 #define GLYPH_DIMENSIONS 120
 
@@ -8,65 +9,13 @@ static struct Ui {
   Window *window;
   
   Layer *glyph_layer;
-  GPath *glyph_path;
+
   int act_glyph;
+  int glyph_paths_num;
+  GPath *glyph_path[ MAX_GLYPH_SEGMENTS ];
 
   TextLayer* text;
 } ui;
-
-#define GLYPH_SIZE 12
-
-static const GPathInfo PATHS[GLYPH_SIZE] = 
-  { 
-    {
-      .num_points = 19,
-      .points = (GPoint[]) {{14,20}, {16,31}, {95,29}, {82,45}, {68,54}, {68,44}, {57,42}, {53,74}, {42,93}, {30,102}, {37,113}, {53,96}, {64,77}, {66,57}, {73,66}, {95,49}, {106,33}, {112,28}, {100,19}}
-    },
-    {
-      .num_points = 13,
-      .points = (GPoint[]) {{25,57}, {63,39}, {89,15}, {101,-2}, {112,5}, {94,25}, {83,36}, {88,36}, {87,101}, {75,101}, {75,44}, {50,61}, {30,70}}
-    },
-    {
-      .num_points = 18,
-      .points = (GPoint[]) {{62,41}, {54,41}, {51,0}, {86,0}, {86,-21}, {99,-21}, {99,0}, {129,0}, {138,7}, {132,39}, {108,70}, {75,82}, {70,70}, {90,68}, {112,52}, {124,29}, {124,13}, {62,12}}
-    },
-    {
-      .num_points = 12,
-      .points = (GPoint[]) {{47,48}, {48,59}, {80,58}, {81,107}, {34,107}, {35,117}, {139,117}, {139,107}, {94,107}, {94,59}, {126,59}, {126,50}}
-    },
-    {
-      .num_points = 21,
-      .points = (GPoint[]) {{58,62}, {65,71}, {93,48}, {115,21}, {116,68}, {113,69}, {104,66}, {99,76}, {118,80}, {127,75}, {126,13}, {164,12}, {163,2}, {127,2}, {127,-24}, {116,-22}, {117,1}, {59,1}, {59,11}, {106,12}, {83,40}}
-    },
-    {
-      .num_points = 21,
-      .points = (GPoint[]) {{31,59}, {34,71}, {69,68}, {56,101}, {34,124}, {43,134}, {67,104}, {79,68}, {108,68}, {106,112}, {101,117}, {88,114}, {84,125}, {104,130}, {114,121}, {119,62}, {112,56}, {81,57}, {80,32}, {69,31}, {70,57}}
-    },
-    {
-      .num_points = 20,
-      .points = (GPoint[]) {{43,36}, {48,55}, {14,60}, {18,70}, {48,66}, {53,88}, {10,94}, {14,105}, {56,99}, {66,138}, {78,134}, {69,98}, {107,92}, {104,81}, {66,90}, {60,64}, {93,59}, {91,51}, {59,57}, {54,36}}
-    },
-    {
-      .num_points = 17,
-      .points = (GPoint[]) {{35,39}, {23,66}, {4,85}, {11,95}, {30,79}, {36,63}, {70,62}, {60,93}, {35,117}, {7,125}, {12,137}, {47,119}, {68,99}, {84,60}, {75,51}, {40,51}, {46,39}}
-    },
-    {
-      .num_points = 19,
-      .points = (GPoint[]) {{63,29}, {58,53}, {48,72}, {33,87}, {41,94}, {65,65}, {93,65}, {90,87}, {80,106}, {53,118}, {58,129}, {83,117}, {97,100}, {104,74}, {104,65}, {131,64}, {131,53}, {68,54}, {76,31}}
-    },
-    {
-      .num_points = 10,
-      .points = (GPoint[]) {{67,74}, {68,84}, {136,84}, {135,130}, {68,130}, {67,140}, {136,140}, {136,145}, {148,145}, {148,71}}
-    },
-    {
-      .num_points = 23,
-      .points = (GPoint[]) {{30,31}, {30,55}, {4,55}, {4,64}, {29,64}, {32,91}, {41,89}, {41,66}, {71,65}, {67,92}, {40,111}, {45,122}, {67,109}, {78,94}, {81,66}, {110,65}, {109,56}, {83,56}, {83,25}, {70,26}, {70,54}, {40,55}, {38,29}}
-    },
-    {
-      .num_points = 20,
-      .points = (GPoint[]) {{34,46}, {60,42}, {83,28}, {112,-9}, {122,-2}, {102,24}, {71,48}, {37,59}, {34,46}, {24,0}, {50,15}, {57,4}, {29,-11}, {24,0}}
-    }
-  };
 
 static void bg_update_proc(Layer *layer, GContext *ctx) {
   GRect bounds = layer_get_bounds(layer);
@@ -78,29 +27,46 @@ static void bg_update_proc(Layer *layer, GContext *ctx) {
 }
 
 static void glyph_layer_update_proc(Layer *layer, GContext *ctx) {    
-  graphics_context_set_fill_color(ctx, GColorRichBrilliantLavender);
-  gpath_draw_filled(ctx, ui.glyph_path);
+  GRect bounds = layer_get_bounds(layer);
+  GPoint center = GPoint(bounds.size.w / 2 - 50, 0);
+
+  for(int i=0; i < ui.glyph_paths_num; i++) {
+    gpath_move_to(ui.glyph_path[i], center);
+
+    graphics_context_set_fill_color(ctx, GColorRichBrilliantLavender);
+    graphics_context_set_stroke_color(ctx, GColorRichBrilliantLavender);
+    gpath_draw_filled(ctx, ui.glyph_path[i]); 
+  }
 }
 
 static void display_glyph(int glyphId) {
-  if(ui.glyph_path != NULL)
-    gpath_destroy(ui.glyph_path);
+  if(glyphId == ui.act_glyph) return;
+
+  for(int i=0; i < ui.glyph_paths_num; i++)
+    gpath_destroy(ui.glyph_path[i]);
+
   ui.act_glyph = glyphId;
+
   if(ui.act_glyph < 0)
     ui.act_glyph = 0;
-  if(ui.act_glyph >= GLYPH_SIZE)
-    ui.act_glyph = GLYPH_SIZE - 1;
+  if(ui.act_glyph >= GLYPHS_NUM)
+    ui.act_glyph = GLYPHS_NUM - 1;
 
-  ui.glyph_path = gpath_create(&PATHS[ui.act_glyph]);
+  ui.glyph_paths_num = kana_app_katakana_glyphs[ui.act_glyph].size;
+  for(int i = 0; i < ui.glyph_paths_num; i++) {
+    ui.glyph_path[i] 
+      = gpath_create(kana_app_katakana_glyphs[ui.act_glyph].glyph_path[i]);
+  }
+
   layer_mark_dirty(window_get_root_layer(ui.window));
 }
 
 static void down_click(ClickRecognizerRef recognizer, void *context) {
-  display_glyph(ui.act_glyph - 1);
+  display_glyph(ui.act_glyph + 1);
 }
 
 static void up_click(ClickRecognizerRef recognizer, void *context) {
-  display_glyph(ui.act_glyph + 1);
+  display_glyph(ui.act_glyph - 1);
 }
 
 static void config_provider(void *ctx) {
@@ -109,6 +75,7 @@ static void config_provider(void *ctx) {
 }
 
 static void load(Window* window) {    
+
   Layer *window_layer = window_get_root_layer(ui.window);
   GRect window_bounds = layer_get_bounds(window_layer);
   layer_set_update_proc(window_layer, bg_update_proc);
@@ -122,6 +89,7 @@ static void load(Window* window) {
   layer_add_child(window_layer, ui.glyph_layer);
   window_set_click_config_provider(ui.window, (ClickConfigProvider) config_provider);
 
+
   display_glyph(0);
 }
 
@@ -131,6 +99,8 @@ static void unload(Window* window) {
 
 void kana_app_quiz_init() {
   ui.window = window_create();
+  ui.act_glyph = -1;
+  ui.glyph_paths_num = 0;
 
   window_set_window_handlers(ui.window,
         (WindowHandlers) {

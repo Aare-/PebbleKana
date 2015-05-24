@@ -69,7 +69,7 @@ char *kana_app_romaji[ALPHABET_ROW_NUM][5] =
    {"MA", "MI",  "MU",  "ME", "MO"},
    {"YA", "YU",  "YO",  "",   ""},
    {"RA", "RI",  "RU",  "RE", "RO"},
-   {"WA", "WO",  "",    "",   ""},
+   {"WA", "WE",  "WO",    "",   ""},
    {"N", "", "", "", ""}};
 
 GDrawCommandImage *kana_app_getPDCIcon(int resourceId) {
