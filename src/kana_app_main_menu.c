@@ -11,10 +11,10 @@
 // - - Katakana
 // - Settings
 
-#define MENU_ITEMS_LEN 5
+#define MENU_ITEMS_LEN 4
 
 static char * menu_labels[MENU_ITEMS_LEN] = 
-    {"Start Quiz", "Learn Hiragana", "Learn Katakana", "Statistics", "Settings"};
+    {"Start Quiz", "Learn Hiragana", "Learn Katakana", "Settings"};
 
 static MenuLayer* menu;
 static Window* main_window;
@@ -64,11 +64,8 @@ static void menu_callback_select_click(MenuLayer* layer, MenuIndex* cell_index, 
                 case 2:
                     kana_app_act_learn_mode = KATAKANA;
                     kana_app_learn_show();
-                    break;
+                    break;                
                 case 3:
-                    kana_app_stats_show();
-                    break;
-                case 4:
                     kana_app_settings_show();
                     break;
             }

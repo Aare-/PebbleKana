@@ -1,4 +1,5 @@
 #include <pebble.h>
+#include <pebble_fonts.h>
 #include "kana_app_quiz.h"
 #include "kana_app_resources.h"
 #include "kana_app_glyphs.h"
@@ -15,6 +16,10 @@ static struct Ui {
   GPath *glyph_path[ MAX_GLYPH_SEGMENTS ];
 
   TextLayer* text;
+
+  TextLayer* answer_top;  
+  TextLayer* answer_middle;
+  TextLayer* answer_bottom;
 } ui;
 
 static void bg_update_proc(Layer *layer, GContext *ctx) {
@@ -39,6 +44,12 @@ static void glyph_layer_update_proc(Layer *layer, GContext *ctx) {
   }
 }
 
+static void reload_answers() {
+  text_layer_set_text(ui.answer_top, kana_app_getRomaji(rand() % ALPHABET_ROW_NUM, rand() % 5));
+  text_layer_set_text(ui.answer_middle, kana_app_getRomaji(rand() % ALPHABET_ROW_NUM, rand() % 5));
+  text_layer_set_text(ui.answer_bottom, kana_app_getRomaji(rand() % ALPHABET_ROW_NUM, rand() % 5));
+}
+
 static void display_glyph(int glyphId) {
   if(glyphId == ui.act_glyph) return;
 
@@ -53,10 +64,16 @@ static void display_glyph(int glyphId) {
     ui.act_glyph = GLYPHS_NUM - 1;
 
   ui.glyph_paths_num = kana_app_katakana_glyphs[ui.act_glyph].size;
+  //ui.glyph_paths_num = kana_app_hiragana_glyphs[ui.act_glyph].size;
+
   for(int i = 0; i < ui.glyph_paths_num; i++) {
     ui.glyph_path[i] 
       = gpath_create(kana_app_katakana_glyphs[ui.act_glyph].glyph_path[i]);
+      //= gpath_create(kana_app_hiragana_glyphs[ui.act_glyph].glyph_path[i]);
   }
+
+  //todo: change this
+  reload_answers();
 
   layer_mark_dirty(window_get_root_layer(ui.window));
 }
@@ -75,11 +92,30 @@ static void config_provider(void *ctx) {
 }
 
 static void load(Window* window) {    
-
   Layer *window_layer = window_get_root_layer(ui.window);
   GRect window_bounds = layer_get_bounds(window_layer);
   layer_set_update_proc(window_layer, bg_update_proc);
 
+  // init text layers
+  ui.answer_top = text_layer_create(GRect(144 - 34, 84 - 40 - 18, 30, 18));
+  text_layer_set_text_alignment(ui.answer_top, GTextAlignmentRight);
+  text_layer_set_font(ui.answer_top, fonts_get_system_font(FONT_KEY_GOTHIC_18));
+  text_layer_set_text(ui.answer_top, "");
+  layer_add_child(window_get_root_layer(window), text_layer_get_layer(ui.answer_top)); 
+  
+  ui.answer_middle = text_layer_create(GRect(144 - 34, 84 - 9, 30, 18));
+  text_layer_set_text_alignment(ui.answer_middle, GTextAlignmentRight);
+  text_layer_set_font(ui.answer_middle, fonts_get_system_font(FONT_KEY_GOTHIC_18));
+  text_layer_set_text(ui.answer_middle, "");
+  layer_add_child(window_get_root_layer(window), text_layer_get_layer(ui.answer_middle)); 
+
+  ui.answer_bottom = text_layer_create(GRect(144 - 34, 84 + 40, 30, 18));
+  text_layer_set_text_alignment(ui.answer_bottom, GTextAlignmentRight);
+  text_layer_set_font(ui.answer_bottom, fonts_get_system_font(FONT_KEY_GOTHIC_18));
+  text_layer_set_text(ui.answer_bottom, "");
+  layer_add_child(window_get_root_layer(window), text_layer_get_layer(ui.answer_bottom)); 
+
+  // init icons
   GRect icon_rect = GRect(0, 0, window_bounds.size.w, window_bounds.size.h);
   grect_align(&icon_rect, &window_bounds, GAlignCenter, false);
   ui.glyph_layer = layer_create(icon_rect);
@@ -88,7 +124,6 @@ static void load(Window* window) {
 
   layer_add_child(window_layer, ui.glyph_layer);
   window_set_click_config_provider(ui.window, (ClickConfigProvider) config_provider);
-
 
   display_glyph(0);
 }

@@ -75,11 +75,13 @@ class SvgHandler(xml.sax.ContentHandler) :
 
 			rw = rw - lx
 			rh = rh - ly
-
 			scale = float(boxSize) / float(rw)
+
+			mov_y = int((168 - rh * scale) / 2)
+
 			for item in translated:
 				out_sub_str += "{" + str(int(item[0] - lx) * scale)
-				out_sub_str += "," + str(int(item[1] - ly) * scale) + "}, "
+				out_sub_str += "," + str(mov_y + int(item[1] - ly) * scale) + "}, "
 			out_sub_str = out_sub_str[:-2]
 
 			if not groupStarted:
