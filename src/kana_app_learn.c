@@ -5,8 +5,11 @@
 
 static struct SimpleColorMenuLayer *simpleMenu;
 
-static void menu_callback_click(MenuLayer* layer, MenuIndex* index, void* data) {
+static int selectedIndex;
 
+static void menu_callback_click(MenuLayer* layer, MenuIndex* index, void* data) {
+  selectedIndex = index->row;
+  //window_stack_push(uilist.window, true);  
 }
 
 // public interface

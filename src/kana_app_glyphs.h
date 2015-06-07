@@ -1,6 +1,6 @@
 #pragma once
 
-#define GLYPHS_NUM 46
+#define GLYPHS_NUM 47
 #define MAX_GLYPH_SEGMENTS 4
 
 typedef struct Glyphs {

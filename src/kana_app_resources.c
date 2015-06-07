@@ -3,7 +3,7 @@
   
 static const int char_count[ALPHABET_ROW_NUM] 
   = {5, 5, 5, 5, 5, 5, 5, 3, 5, 2, 1};
-/*
+
 static const int katakana[11][5] = 
 	{{RESOURCE_ID_K_A,  RESOURCE_ID_K_I,   RESOURCE_ID_K_U,   RESOURCE_ID_K_E,  RESOURCE_ID_K_O},
    {RESOURCE_ID_K_KA, RESOURCE_ID_K_KI,  RESOURCE_ID_K_KU,  RESOURCE_ID_K_KE, RESOURCE_ID_K_KO},
@@ -16,6 +16,7 @@ static const int katakana[11][5] =
    {RESOURCE_ID_K_RA, RESOURCE_ID_K_RI,  RESOURCE_ID_K_RU,  RESOURCE_ID_K_RE, RESOURCE_ID_K_RO},
    {RESOURCE_ID_K_WA, RESOURCE_ID_K_WO, 0, 0, 0},
    {RESOURCE_ID_K_N, 0, 0, 0, 0}};
+/*
 static const int hiragana[11][5] = 
   {{RESOURCE_ID_H_A,  RESOURCE_ID_H_I,   RESOURCE_ID_H_U,   RESOURCE_ID_H_E,  RESOURCE_ID_H_O},
    {RESOURCE_ID_H_KA, RESOURCE_ID_H_KI,  RESOURCE_ID_H_KU,  RESOURCE_ID_H_KE, RESOURCE_ID_H_KO},
@@ -29,14 +30,6 @@ static const int hiragana[11][5] =
    {RESOURCE_ID_H_WA, RESOURCE_ID_H_WO, 0, 0, 0},
    {RESOURCE_ID_H_N, 0, 0, 0, 0}};   
    */
-
-static const int katakana_pdc[11][5] =
-  {{RESOURCE_ID_PDC_KANA_A, RESOURCE_ID_PDC_KANA_I, RESOURCE_ID_PDC_KANA_U, RESOURCE_ID_PDC_KANA_E, RESOURCE_ID_PDC_KANA_O},
-   {0, 0, 0, 0, 0},
-   {0, 0, 0, 0, 0},
-   {0, 0, 0, 0, 0},
-   {0, 0, 0, 0, 0}};
-
 
 // public interface
 
@@ -81,7 +74,7 @@ int kana_app_getCharCount(int i) {
 }
 
 int kana_app_getKatakana(int i, int j) {
-  return katakana_pdc[i][j];
+  return katakana[i][j];
 }
 
 int kana_app_getHiragana(int i, int j) {
