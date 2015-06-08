@@ -45,16 +45,11 @@ class SvgHandler(xml.sax.ContentHandler) :
 
 			parts = attrs["d"].split(' ')[1:-1]
 
-			raw = []			
-			first = True
+			raw = []
 			for item in parts:
 				coords = item.split(",")
 				x = int(float(coords[0]))
-				y = int(float(coords[1]))				
-				#if first:
-				#	x = 0
-				#	y = 0
-				first = False
+				y = int(float(coords[1]))
 				raw.append([x, y])
 			
 			sum_x = sum_y = 0			
@@ -100,15 +95,16 @@ class SvgHandler(xml.sax.ContentHandler) :
 
 					rw = rw - lx
 					rh = rh - ly
-					scale = float(boxSize) / float(rw)
+					scale = min(float(boxSize) / float(rw), float(boxSize) / float(rh))
 
 					mov_y = int((168 - rh * scale) / 2)
+					mov_x = int((boxSize - rw * scale) / 2)
 
 					ctr = 0
 					for glyph in self.rawPosCache:
 						out_sub_str = ""
 						for item in glyph:
-							out_sub_str += "{" + str(int(item[0] - lx) * scale)
+							out_sub_str += "{" + str(int(item[0] - lx) * scale + mov_x)
 							out_sub_str += "," + str(int(item[1] - ly) * scale + mov_y) + "}, "				
 						out_sub_str = out_sub_str[:-2]
 

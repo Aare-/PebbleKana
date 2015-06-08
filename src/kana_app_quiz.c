@@ -63,13 +63,13 @@ static void display_glyph(int glyphId) {
   if(ui.act_glyph >= GLYPHS_NUM)
     ui.act_glyph = GLYPHS_NUM - 1;
 
-  ui.glyph_paths_num = kana_app_katakana_glyphs[ui.act_glyph].size;
-  //ui.glyph_paths_num = kana_app_hiragana_glyphs[ui.act_glyph].size;
+  //ui.glyph_paths_num = kana_app_katakana_glyphs[ui.act_glyph].size;
+  ui.glyph_paths_num = kana_app_hiragana_glyphs[ui.act_glyph].size;
 
   for(int i = 0; i < ui.glyph_paths_num; i++) {
     ui.glyph_path[i] 
-      = gpath_create(kana_app_katakana_glyphs[ui.act_glyph].glyph_path[i]);
-      //= gpath_create(kana_app_hiragana_glyphs[ui.act_glyph].glyph_path[i]);
+      //= gpath_create(kana_app_katakana_glyphs[ui.act_glyph].glyph_path[i]);
+      = gpath_create(kana_app_hiragana_glyphs[ui.act_glyph].glyph_path[i]);
   }
 
   //todo: change this
