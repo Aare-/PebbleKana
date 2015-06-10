@@ -16,7 +16,7 @@ static const int katakana[11][5] =
    {RESOURCE_ID_K_RA, RESOURCE_ID_K_RI,  RESOURCE_ID_K_RU,  RESOURCE_ID_K_RE, RESOURCE_ID_K_RO},
    {RESOURCE_ID_K_WA, RESOURCE_ID_K_WO, 0, 0, 0},
    {RESOURCE_ID_K_N, 0, 0, 0, 0}};
-/*
+
 static const int hiragana[11][5] = 
   {{RESOURCE_ID_H_A,  RESOURCE_ID_H_I,   RESOURCE_ID_H_U,   RESOURCE_ID_H_E,  RESOURCE_ID_H_O},
    {RESOURCE_ID_H_KA, RESOURCE_ID_H_KI,  RESOURCE_ID_H_KU,  RESOURCE_ID_H_KE, RESOURCE_ID_H_KO},
@@ -29,13 +29,6 @@ static const int hiragana[11][5] =
    {RESOURCE_ID_H_RA, RESOURCE_ID_H_RI,  RESOURCE_ID_H_RU,  RESOURCE_ID_H_RE, RESOURCE_ID_H_RO},
    {RESOURCE_ID_H_WA, RESOURCE_ID_H_WO, 0, 0, 0},
    {RESOURCE_ID_H_N, 0, 0, 0, 0}};   
-   */
-
-// public interface
-
-//GDrawCommandImage *kana_app_resources_get_icon(int resourceId) {
-//  return gdraw_command_image_create_with_resource(resourceId);
-//}
 
 char *kana_app_rows_names[ALPHABET_ROW_NUM] = 
   {
@@ -73,18 +66,37 @@ int kana_app_getCharCount(int i) {
   return char_count[i];
 }
 
-int kana_app_getKatakana(int i, int j) {
-  return katakana[i][j];
+int kana_app_getKatakana(int i) {
+  int j = 0;
+  while(i >= char_count[j]) {
+    i -= char_count[j];
+    j++;
+  }
+  return katakana[j][i];
 }
 
-int kana_app_getHiragana(int i, int j) {
-  return -1;//hiragana[i][j];
+int kana_app_getHiragana(int i) {
+  int j = 0;
+  while(i >= char_count[j]) {
+    i -= char_count[j];
+    j++;
+  }
+  return hiragana[j][i];
+}
+
+char* kana_app_getRomaji(int i) {
+  int j = 0;
+  while(i >= char_count[j]) {
+    i -= char_count[j];
+    j++;
+  }
+  return kana_app_romaji[j][i];
 }
 
 char* kana_app_getRowName(int i) {
   return kana_app_rows_names[i];
 }  
 
-char* kana_app_getRomaji(int i, int j) {
+char* kana_app_getRomajiByRowAndCol(int i, int j) {
   return kana_app_romaji[i][j];
 }

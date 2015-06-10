@@ -254,8 +254,238 @@
           "file": "png_katakana/k_a.png",
           "name": "K_A",
           "type": "png"
+      },
+      {
+          "file": "png_hiragana/h_n.png",
+          "name": "H_N",
+          "type": "png"
+      },
+      {
+          "file": "png_hiragana/h_wo.png",
+          "name": "H_WO",
+          "type": "png"
+      },
+      {
+          "file": "png_hiragana/h_wa.png",
+          "name": "H_WA",
+          "type": "png"
+      },
+      {
+          "file": "png_hiragana/h_ro.png",
+          "name": "H_RO",
+          "type": "png"
+      },
+      {
+          "file": "png_hiragana/h_re.png",
+          "name": "H_RE",
+          "type": "png"
+      },
+      {
+          "file": "png_hiragana/h_ru.png",
+          "name": "H_RU",
+          "type": "png"
+      },
+      {
+          "file": "png_hiragana/h_ri.png",
+          "name": "H_RI",
+          "type": "png"
+      },
+      {
+          "file": "png_hiragana/h_ra.png",
+          "name": "H_RA",
+          "type": "png"
+      },
+      {
+          "file": "png_hiragana/h_yo.png",
+          "name": "H_YO",
+          "type": "png"
+      },
+      {
+          "file": "png_hiragana/h_yu.png",
+          "name": "H_YU",
+          "type": "png"
+      },
+      {
+          "file": "png_hiragana/h_ya.png",
+          "name": "H_YA",
+          "type": "png"
+      },
+      {
+          "file": "png_hiragana/h_mo.png",
+          "name": "H_MO",
+          "type": "png"
+      },
+      {
+          "file": "png_hiragana/h_me.png",
+          "name": "H_ME",
+          "type": "png"
+      },
+      {
+          "file": "png_hiragana/h_mu.png",
+          "name": "H_MU",
+          "type": "png"
+      },
+      {
+          "file": "png_hiragana/h_mi.png",
+          "name": "H_MI",
+          "type": "png"
+      },
+      {
+          "file": "png_hiragana/h_ma.png",
+          "name": "H_MA",
+          "type": "png"
+      },
+      {
+          "file": "png_hiragana/h_ho.png",
+          "name": "H_HO",
+          "type": "png"
+      },
+      {
+          "file": "png_hiragana/h_he.png",
+          "name": "H_HE",
+          "type": "png"
+      },
+      {
+          "file": "png_hiragana/h_fu.png",
+          "name": "H_FU",
+          "type": "png"
+      },
+      {
+          "file": "png_hiragana/h_hi.png",
+          "name": "H_HI",
+          "type": "png"
+      },
+      {
+          "file": "png_hiragana/h_ha.png",
+          "name": "H_HA",
+          "type": "png"
+      },
+      {
+          "file": "png_hiragana/h_no.png",
+          "name": "H_NO",
+          "type": "png"
+      },
+      {
+          "file": "png_hiragana/h_ne.png",
+          "name": "H_NE",
+          "type": "png"
+      },
+      {
+          "file": "png_hiragana/h_nu.png",
+          "name": "H_NU",
+          "type": "png"
+      },
+      {
+          "file": "png_hiragana/h_ni.png",
+          "name": "H_NI",
+          "type": "png"
+      },
+      {
+          "file": "png_hiragana/h_na.png",
+          "name": "H_NA",
+          "type": "png"
+      },
+      {
+          "file": "png_hiragana/h_to.png",
+          "name": "H_TO",
+          "type": "png"
+      },
+      {
+          "file": "png_hiragana/h_te.png",
+          "name": "H_TE",
+          "type": "png"
+      },
+      {
+          "file": "png_hiragana/h_tsu.png",
+          "name": "H_TSU",
+          "type": "png"
+      },
+      {
+          "file": "png_hiragana/h_chi.png",
+          "name": "H_CHI",
+          "type": "png"
+      },
+      {
+          "file": "png_hiragana/h_ta.png",
+          "name": "H_TA",
+          "type": "png"
+      },
+      {
+          "file": "png_hiragana/h_so.png",
+          "name": "H_SO",
+          "type": "png"
+      },
+      {
+          "file": "png_hiragana/h_se.png",
+          "name": "H_SE",
+          "type": "png"
+      },
+      {
+          "file": "png_hiragana/h_su.png",
+          "name": "H_SU",
+          "type": "png"
+      },
+      {
+          "file": "png_hiragana/h_shi.png",
+          "name": "H_SHI",
+          "type": "png"
+      },
+      {
+          "file": "png_hiragana/h_sa.png",
+          "name": "H_SA",
+          "type": "png"
+      },
+      {
+          "file": "png_hiragana/h_ko.png",
+          "name": "H_KO",
+          "type": "png"
+      },
+      {
+          "file": "png_hiragana/h_ke.png",
+          "name": "H_KE",
+          "type": "png"
+      },
+      {
+          "file": "png_hiragana/h_ku.png",
+          "name": "H_KU",
+          "type": "png"
+      },
+      {
+          "file": "png_hiragana/h_ki.png",
+          "name": "H_KI",
+          "type": "png"
+      },
+      {
+          "file": "png_hiragana/h_ka.png",
+          "name": "H_KA",
+          "type": "png"
+      },
+      {
+          "file": "png_hiragana/h_i.png",
+          "name": "H_I",
+          "type": "png"
+      },
+
+      {
+          "file": "png_hiragana/h_o.png",
+          "name": "H_O",
+          "type": "png"
+      },
+      {
+          "file": "png_hiragana/h_e.png",
+          "name": "H_E",
+          "type": "png"
+      },
+      {
+          "file": "png_hiragana/h_u.png",
+          "name": "H_U",
+          "type": "png"
+      },
+      {
+          "file": "png_hiragana/h_a.png",
+          "name": "H_A",
+          "type": "png"
       }
-      
     ]
   }
 }
