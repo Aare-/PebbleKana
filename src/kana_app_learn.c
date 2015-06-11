@@ -53,7 +53,7 @@ static void top_list_unload(Window* window) {
 static void details_list_load(Window* window) {
   int len = kana_app_getCharCount(selectedIndex);
   for(int i=0; i < len; i++) {
-    if(HIRAGANA)
+    if(kana_app_act_learn_mode == HIRAGANA)
       icons[i] = gbitmap_create_with_resource(kana_app_getHiraganaColRow( selectedIndex, i));
     else
       icons[i] = gbitmap_create_with_resource(kana_app_getKatakanaColRow( selectedIndex, i));
