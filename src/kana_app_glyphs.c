@@ -1417,4 +1417,6 @@ kana_app_hiragana_glyphs[44].glyph_path[0] = &GLYPH_HIRA_44_0;
 kana_app_hiragana_glyphs[45].size = 1;
 kana_app_hiragana_glyphs[45].glyph_path[0] = &GLYPH_HIRA_45_0;
 
+
+
 }

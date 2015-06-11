@@ -6,17 +6,17 @@ static uint16_t mc_get_num_sections(MenuLayer *layer, void *data) {
 }
 
 static uint16_t mc_get_num_rows(MenuLayer *layer, uint16_t section, void *data) {
-	struct SimpleColorMenuLayer *layerData = (struct SimpleColorMenuLayer*)data;	
+	SimpleColorMenuLayer *layerData = ( SimpleColorMenuLayer*)data;	
     return layerData->menuItemsLen;
 }
 
 static int16_t mc_get_cell_height(MenuLayer *layer, MenuIndex* section, void *data) {
-	struct SimpleColorMenuLayer *layerData = (struct SimpleColorMenuLayer*)data;
+	SimpleColorMenuLayer *layerData = (SimpleColorMenuLayer*)data;
     return layerData->cellHeight;
 }
 
 static int16_t mc_get_header_height(MenuLayer *layer, uint16_t index, void *data) {    
-	struct SimpleColorMenuLayer *layerData = (struct SimpleColorMenuLayer*)data;
+	SimpleColorMenuLayer *layerData = (SimpleColorMenuLayer*)data;
 
     if(index == 0 && layerData->title != NULL)
         return layerData->headerHeight;
@@ -24,7 +24,7 @@ static int16_t mc_get_header_height(MenuLayer *layer, uint16_t index, void *data
 }
 
 static void mc_draw_row(GContext *ctx, const Layer *cell_layer, MenuIndex *cell_index, void *data) {    
-	struct SimpleColorMenuLayer *layerData = (struct SimpleColorMenuLayer *)data;
+	SimpleColorMenuLayer *layerData = (SimpleColorMenuLayer *)data;
 
     menu_cell_basic_draw(
     	ctx, 
@@ -32,11 +32,12 @@ static void mc_draw_row(GContext *ctx, const Layer *cell_layer, MenuIndex *cell_
     	(layerData->cellItemsTitle)[cell_index->row], 
     	(layerData->cellItemsSubtitle) == NULL ? 
             NULL : (layerData->cellItemsSubtitle)[cell_index->row], 
-    	NULL);    
+    	layerData->icons == NULL ? 
+            NULL : (layerData->icons)[cell_index->row]);    
 }
 
 static void mc_draw_header(GContext *ctx, const Layer *cell_layer, uint16_t section_index, void *data) {    
-	struct SimpleColorMenuLayer *layerData = (struct SimpleColorMenuLayer *)data;
+	SimpleColorMenuLayer *layerData = (SimpleColorMenuLayer *)data;
 
     if(section_index == 0 && layerData->title != NULL) {
         menu_cell_basic_header_draw(
@@ -46,18 +47,19 @@ static void mc_draw_header(GContext *ctx, const Layer *cell_layer, uint16_t sect
     }
 }
 
-struct SimpleColorMenuLayer *kana_app_simple_menu_init (
+SimpleColorMenuLayer *kana_app_simple_menu_init (
 		Window* window, 
         char* title,
 		int numItems,
 		char** cellItemsTitle, 
 		char** cellItemsSubtitle,		
+        GBitmap** cellIcons,
 		void (*sel_click_callback)(MenuLayer*, MenuIndex*, void*)) {
 
 	Layer *window_layer = window_get_root_layer(window);
     GRect bounds = layer_get_frame(window_layer);
 
-	struct SimpleColorMenuLayer *mStruct = malloc(sizeof(struct SimpleColorMenuLayer));
+	SimpleColorMenuLayer *mStruct = malloc(sizeof(SimpleColorMenuLayer));
 	
 	mStruct->window = window;
 	mStruct->menuItemsLen = numItems;
@@ -67,6 +69,7 @@ struct SimpleColorMenuLayer *kana_app_simple_menu_init (
     mStruct->title = title;
 	mStruct->cellItemsTitle = cellItemsTitle;
 	mStruct->cellItemsSubtitle = cellItemsSubtitle;
+    mStruct->icons = cellIcons;
 
 	menu_layer_set_callbacks(
 		mStruct->menuLayer, 
@@ -95,7 +98,7 @@ struct SimpleColorMenuLayer *kana_app_simple_menu_init (
 }
 
 void kana_app_simple_menu_set_color (
-		struct SimpleColorMenuLayer *layerData, 
+		SimpleColorMenuLayer *layerData, 
 		GColor backColor, 
 		GColor frontColor, 
 		GColor highlightBackColor, 

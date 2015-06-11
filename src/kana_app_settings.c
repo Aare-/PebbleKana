@@ -4,7 +4,7 @@
 #include "kana_app_simple_menu_color.h"
 #include "kana_app_simple_menu_color.h"
 
-static struct SimpleColorMenuLayer *simpleMenu;
+static SimpleColorMenuLayer *simpleMenu;
 
 #define LIST_TITLES_LEN 4
 
@@ -51,6 +51,7 @@ void kana_app_settings_init() {
         LIST_TITLES_LEN,
         setting_cell_titles,
         setting_cell_sel_subtitles,
+        NULL,
         menu_callback_click
       );
 

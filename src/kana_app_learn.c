@@ -3,52 +3,110 @@
 #include "kana_app_resources.h"
 #include "kana_app_simple_menu_color.h"
 
-static struct SimpleColorMenuLayer *simpleMenu;
+extern GColor kana_app_bitmap_pallete[2];
+
+static struct LearnUi {
+  Window* window;
+  SimpleColorMenuLayer* menu;
+} ui;
+
+static struct RowDetailsUi {
+  Window* window;
+  SimpleColorMenuLayer* menu;
+} details_ui;
 
 static int selectedIndex;
 
+static GBitmap* icons[5];
+
 static void menu_callback_click(MenuLayer* layer, MenuIndex* index, void* data) {
   selectedIndex = index->row;
-  //window_stack_push(uilist.window, true);  
+  window_stack_push(details_ui.window, true);  
 }
 
-// public interface
-
-kana_app_learn_mode_type kana_app_act_learn_mode = HIRAGANA;
-
-void kana_app_learn_init() {
-  simpleMenu = kana_app_simple_menu_init(
-    window_create(),
-    "",
+static void top_list_load(Window* window) {
+  ui.menu = kana_app_simple_menu_init(
+    ui.window,
+    kana_app_act_learn_mode == HIRAGANA ? "Hiragana" : "Katakana",
     ALPHABET_ROW_NUM,
     kana_app_rows_names,
-    NULL,
+    NULL, NULL,
     menu_callback_click
   );
 
   #ifdef PBL_COLOR
   kana_app_simple_menu_set_color(
-    simpleMenu,
+    ui.menu,
     GColorVeryLightBlue, GColorRichBrilliantLavender,
     GColorRichBrilliantLavender, GColorWhite);
   #endif
 }
 
-void kana_app_learn_show() {
-  switch(kana_app_act_learn_mode) {
-    case HIRAGANA:
-      simpleMenu->title = "Hiragana";
-      break;
-    case KATAKANA:
-      simpleMenu->title = "Katakana";
-      break;
+static void top_list_unload(Window* window) {
+  menu_layer_destroy(ui.menu->menuLayer);
+}
+
+static void details_list_load(Window* window) {
+  for(int i=0; i<kana_app_getCharCount(selectedIndex); i++) {
+    icons[i] = gbitmap_create_with_resource(kana_app_getHiraganaColRow( selectedIndex, i));
+    
+    gbitmap_set_palette(icons[i], kana_app_bitmap_pallete, false);
   }
-  window_stack_push(simpleMenu->window, true);
+
+  details_ui.menu = kana_app_simple_menu_init(
+    details_ui.window,
+    kana_app_act_learn_mode == HIRAGANA ? "Hiragana" : "Katakana",
+    kana_app_getCharCount(selectedIndex),
+    kana_app_getRow(selectedIndex),
+    NULL, 
+    icons, 
+    NULL
+  );
+
+  #ifdef PBL_COLOR
+  kana_app_simple_menu_set_color(
+    details_ui.menu,
+    GColorVeryLightBlue, GColorRichBrilliantLavender,
+    GColorRichBrilliantLavender, GColorWhite);
+  #endif
+}
+
+static void details_list_unload(Window* window) {
+  for(int i=0; i<kana_app_getCharCount(selectedIndex); i++) gbitmap_destroy(icons[i]);
+
+  menu_layer_destroy(details_ui.menu->menuLayer);
+}
+
+// public interface
+kana_app_learn_mode_type kana_app_act_learn_mode = HIRAGANA;
+
+void kana_app_learn_show() {
+  window_stack_push(ui.window, true);
+}
+
+void kana_app_learn_init() {
+  //top list
+  ui.window = window_create();
+  window_set_window_handlers(ui.window,
+        (WindowHandlers) {
+            .load = top_list_load,
+            .unload = top_list_unload
+        });
+
+  
+
+  //details list
+  details_ui.window = window_create();
+  window_set_window_handlers(details_ui.window,
+        (WindowHandlers) {
+            .load = details_list_load,
+            .unload = details_list_unload
+        });
 }
 
 void kana_app_learn_deinit() {
-  window_destroy(simpleMenu->window);
-  free(simpleMenu);
+  window_destroy(ui.window);
+  free(ui.menu);
 }
 
 /*

@@ -5,20 +5,20 @@
 #include "kana_app_glyphs.h"
 #include "kana_app_settings.h"
 
-#define GLYPH_DIMENSIONS 120
-
 #define BG_COLOR GColorVeryLightBlue
 #define FG_COLOR GColorRichBrilliantLavender
 #define SEC_FG_COLOR GColorRichBrilliantLavender
 #define WRONG_ANSWER_COLOR GColorElectricUltramarine
+#define GLYPH_DIMENSIONS 120
 
 //simple min! use with causion!
 #define MIN(__a__, __b__) ((__a__) < (__b__) ? (__a__) : (__b__))
 
-static GColor pallete[2];
-static GColor error_pallete[2];
+GColor kana_app_bitmap_pallete[2];
+GColor kana_app_bitmap_error_pallete[2];
 
 static int choosen_question_mode;
+static int previous_question;
 
 static int total_question_num;
 static int correct_anserted_questions;
@@ -130,7 +130,7 @@ static void load_new_question() {
     for(int i=0; i<3; i++) {
       GRect answerBounds = GRect(144 - 34, 84 - 58 + i * 49, 30, 18);
 
-      gbitmap_set_palette(ui.bitmaps[i], pallete, false);
+      gbitmap_set_palette(ui.bitmaps[i], kana_app_bitmap_pallete, false);
 
       ui.bitmapLayers[i] = bitmap_layer_create(answerBounds);
       bitmap_layer_set_bitmap(ui.bitmapLayers[i], ui.bitmaps[i]);
@@ -202,7 +202,7 @@ static void button_click(ClickRecognizerRef recognizer, void *context) {
         }
 
         GRect answerBounds = GRect(144 - 34, 84 - 58 + answerNum * 49, 30, 18);
-        gbitmap_set_palette(ui.bitmaps[answerNum], error_pallete, false);
+        gbitmap_set_palette(ui.bitmaps[answerNum], kana_app_bitmap_error_pallete, false);
         ui.bitmapLayers[answerNum] = bitmap_layer_create(answerBounds);
         bitmap_layer_set_bitmap(ui.bitmapLayers[answerNum], ui.bitmaps[answerNum]);
 
@@ -291,11 +291,11 @@ void kana_app_quiz_init() {
   ui.window = window_create();
   ui.glyph_paths_num = 0;
 
-  pallete[0] = FG_COLOR;
-  pallete[1] = BG_COLOR;
+  kana_app_bitmap_pallete[0] = FG_COLOR;
+  kana_app_bitmap_pallete[1] = BG_COLOR;
 
-  error_pallete[0] = WRONG_ANSWER_COLOR;
-  error_pallete[1] = BG_COLOR;
+  kana_app_bitmap_error_pallete[0] = WRONG_ANSWER_COLOR;
+  kana_app_bitmap_error_pallete[1] = BG_COLOR;
 
   window_set_window_handlers(ui.window,
         (WindowHandlers) {

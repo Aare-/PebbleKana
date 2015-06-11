@@ -84,6 +84,14 @@ int kana_app_getHiragana(int i) {
   return hiragana[j][i];
 }
 
+int kana_app_getHiraganaColRow(int i, int j) {
+  return katakana[i][j];
+}
+
+int kana_app_getKatakanaColRow(int i, int j) {
+  return hiragana[i][j];
+}
+
 char* kana_app_getRomaji(int i) {
   int j = 0;
   while(i >= char_count[j]) {
@@ -96,6 +104,10 @@ char* kana_app_getRomaji(int i) {
 char* kana_app_getRowName(int i) {
   return kana_app_rows_names[i];
 }  
+
+char** kana_app_getRow(int i) {
+  return kana_app_romaji[i];
+}
 
 char* kana_app_getRomajiByRowAndCol(int i, int j) {
   return kana_app_romaji[i][j];

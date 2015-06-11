@@ -1,4 +1,5 @@
 #include <pebble.h>
+
 #include "kana_app_glyphs.h"
 #include "kana_app_main_menu.h"
 #include "kana_app_quiz.h"
