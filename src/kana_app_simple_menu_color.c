@@ -97,23 +97,22 @@ SimpleColorMenuLayer *kana_app_simple_menu_init (
 	return mStruct;
 }
 
+#ifdef PBL_COLOR
 void kana_app_simple_menu_set_color (
 		SimpleColorMenuLayer *layerData, 
 		GColor backColor, 
 		GColor frontColor, 
 		GColor highlightBackColor, 
 		GColor highlightFrontColor) {
+    
+    menu_layer_set_normal_colors(
+    	layerData->menuLayer, 
+    	backColor, 
+    	frontColor);
 
-	#ifdef PBL_COLOR
-        menu_layer_set_normal_colors(
-        	layerData->menuLayer, 
-        	backColor, 
-        	frontColor);
-        menu_layer_set_highlight_colors(
-        	layerData->menuLayer, 
-        	highlightBackColor, 
-        	highlightFrontColor);
-    #else
-
-    #endif
+    menu_layer_set_highlight_colors(
+    	layerData->menuLayer, 
+    	highlightBackColor, 
+    	highlightFrontColor);        
 }
+#endif

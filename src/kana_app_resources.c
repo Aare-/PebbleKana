@@ -12,10 +12,10 @@ static const int katakana[11][5] =
    {RESOURCE_ID_K_NA, RESOURCE_ID_K_NI,  RESOURCE_ID_K_NU,  RESOURCE_ID_K_NE, RESOURCE_ID_K_NO},
    {RESOURCE_ID_K_HA, RESOURCE_ID_K_HI,  RESOURCE_ID_K_FU,  RESOURCE_ID_K_HE, RESOURCE_ID_K_HO},
    {RESOURCE_ID_K_MA, RESOURCE_ID_K_MI,  RESOURCE_ID_K_MU,  RESOURCE_ID_K_ME, RESOURCE_ID_K_MO},
-   {RESOURCE_ID_K_YA, RESOURCE_ID_K_YU,  RESOURCE_ID_K_YO,  0, 0},
+   {RESOURCE_ID_K_YA, RESOURCE_ID_K_YU,  RESOURCE_ID_K_YO,  0,                0},
    {RESOURCE_ID_K_RA, RESOURCE_ID_K_RI,  RESOURCE_ID_K_RU,  RESOURCE_ID_K_RE, RESOURCE_ID_K_RO},
-   {RESOURCE_ID_K_WA, RESOURCE_ID_K_WO, 0, 0, 0},
-   {RESOURCE_ID_K_N, 0, 0, 0, 0}};
+   {RESOURCE_ID_K_WA, RESOURCE_ID_K_WO,  0,                 0,                0},
+   {RESOURCE_ID_K_N,  0,                 0,                 0,                0}};
 
 static const int hiragana[11][5] = 
   {{RESOURCE_ID_H_A,  RESOURCE_ID_H_I,   RESOURCE_ID_H_U,   RESOURCE_ID_H_E,  RESOURCE_ID_H_O},
@@ -25,10 +25,10 @@ static const int hiragana[11][5] =
    {RESOURCE_ID_H_NA, RESOURCE_ID_H_NI,  RESOURCE_ID_H_NU,  RESOURCE_ID_H_NE, RESOURCE_ID_H_NO},
    {RESOURCE_ID_H_HA, RESOURCE_ID_H_HI,  RESOURCE_ID_H_FU,  RESOURCE_ID_H_HE, RESOURCE_ID_H_HO},
    {RESOURCE_ID_H_MA, RESOURCE_ID_H_MI,  RESOURCE_ID_H_MU,  RESOURCE_ID_H_ME, RESOURCE_ID_H_MO},
-   {RESOURCE_ID_H_YA, RESOURCE_ID_H_YU,  RESOURCE_ID_H_YO,  0, 0},
+   {RESOURCE_ID_H_YA, RESOURCE_ID_H_YU,  RESOURCE_ID_H_YO,  0,                0},
    {RESOURCE_ID_H_RA, RESOURCE_ID_H_RI,  RESOURCE_ID_H_RU,  RESOURCE_ID_H_RE, RESOURCE_ID_H_RO},
-   {RESOURCE_ID_H_WA, RESOURCE_ID_H_WO, 0, 0, 0},
-   {RESOURCE_ID_H_N, 0, 0, 0, 0}};   
+   {RESOURCE_ID_H_WA, RESOURCE_ID_H_WO,  0,                 0,                0},
+   {RESOURCE_ID_H_N,  0,                 0,                 0,                0}};   
 
 char *kana_app_rows_names[ALPHABET_ROW_NUM] = 
   {
@@ -58,10 +58,6 @@ char *kana_app_romaji[ALPHABET_ROW_NUM][5] =
    {"WA", "WE",  "WO",    "",   ""},
    {"N", "", "", "", ""}};
 
-GDrawCommandImage *kana_app_getPDCIcon(int resourceId) {
-  return gdraw_command_image_create_with_resource(resourceId);
-}
-
 int kana_app_getCharCount(int i) {
   return char_count[i];
 }
@@ -85,11 +81,11 @@ int kana_app_getHiragana(int i) {
 }
 
 int kana_app_getHiraganaColRow(int i, int j) {
-  return katakana[i][j];
+  return hiragana[i][j];
 }
 
 int kana_app_getKatakanaColRow(int i, int j) {
-  return hiragana[i][j];
+  return katakana[i][j];
 }
 
 char* kana_app_getRomaji(int i) {

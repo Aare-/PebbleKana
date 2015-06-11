@@ -13,12 +13,19 @@
     "watchface": false
   },
   "targetPlatforms": [
-    "basalt"
+    "basalt", "aplite"
   ],
   "sdkVersion": "3",
   
   "resources": {
     "media": [
+      {
+          "file": "kana_ico.png",
+          "menuIcon": true,
+          "name": "ICO",
+          "type": "png"
+      },
+
       {
         "type": "png",
         "name": "FUJI",

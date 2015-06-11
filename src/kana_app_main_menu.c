@@ -3,12 +3,10 @@
 #include "kana_app_settings.h"
 #include "kana_app_learn.h"
 #include "kana_app_quiz.h"
-#include "kana_app_stats.h"
 
 // - Start Quiz
-// - Learn
-// - - Hiragana
-// - - Katakana
+// - Learn Hiragana
+// - Learn Katakana
 // - Settings
 
 #define MENU_ITEMS_LEN 4
@@ -77,9 +75,6 @@ static void load(Window* window) {
     Layer *window_layer = window_get_root_layer(window);
     GRect bounds = layer_get_frame(window_layer);
 
-    //TODO: handle old pebble
-    fuji = gbitmap_create_with_resource(RESOURCE_ID_FUJI);
-
     menu = menu_layer_create(bounds);
     menu_layer_set_callbacks(menu, NULL,
         (MenuLayerCallbacks) {
@@ -97,16 +92,18 @@ static void load(Window* window) {
 
     #ifdef PBL_COLOR
         menu_layer_set_normal_colors(menu, GColorVeryLightBlue, GColorRichBrilliantLavender);
-        menu_layer_set_highlight_colors(menu, GColorRichBrilliantLavender, GColorWhite);
-    #else
-
+        menu_layer_set_highlight_colors(menu, GColorRichBrilliantLavender, GColorWhite);    
     #endif
 
     menu_layer_set_click_config_onto_window(menu, window);
+
+    fuji = gbitmap_create_with_resource(RESOURCE_ID_FUJI);
+
     layer_add_child(window_get_root_layer(window), menu_layer_get_layer(menu));
 }
 
 static void unload(Window* window) {
+    gbitmap_destroy(fuji);
     menu_layer_destroy(menu);
 }
 

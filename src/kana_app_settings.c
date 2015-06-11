@@ -56,10 +56,10 @@ void kana_app_settings_init() {
       );
 
     #ifdef PBL_COLOR
-    kana_app_simple_menu_set_color(
-        simpleMenu,
-        GColorVeryLightBlue, GColorRichBrilliantLavender,
-        GColorRichBrilliantLavender, GColorWhite);
+        kana_app_simple_menu_set_color(
+            simpleMenu,
+            GColorVeryLightBlue, GColorRichBrilliantLavender,
+            GColorRichBrilliantLavender, GColorWhite);
     #endif
 }
 
@@ -74,5 +74,6 @@ void kana_app_settings_deinit() {
 
 int kana_app_settings_get_setting(int key) {
     int storPosition = SETTINGS_STORAGE + key;
-    return persist_exists(storPosition) ? persist_read_int(storPosition) % setting_subtitles_len[key] : 0;
+    return persist_exists(storPosition) ? 
+        persist_read_int(storPosition) % setting_subtitles_len[key] : 0;
 }

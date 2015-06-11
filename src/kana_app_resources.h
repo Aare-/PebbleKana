@@ -7,8 +7,6 @@
 
 extern char *kana_app_rows_names[ALPHABET_ROW_NUM];
 extern char *kana_app_romaji[ALPHABET_ROW_NUM][5];
-  
-GDrawCommandImage *kana_app_getPDCIcon(int);
 
 int kana_app_getCharCount(int);
 int kana_app_getKatakana(int);
