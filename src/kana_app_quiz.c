@@ -114,8 +114,11 @@ static void load_new_question() {
       currentQuestion.answer[i] = rand() % GLYPHS_NUM;
       for(int j=0; j<i; j++)
         if(currentQuestion.answer[j] == currentQuestion.answer[i]) duplicate = true;
+      if(previous_question == currentQuestion.answer[i]) duplicate = true; 
     } while (duplicate);
   }
+
+  previous_question = currentQuestion.answer[currentQuestion.correct_answer_num];
 
   int act_char_id = currentQuestion.answer[currentQuestion.correct_answer_num];
   if(displayRomaji == ROMAJI_AS_QUESTION) {
@@ -223,6 +226,8 @@ static void config_provider(void *ctx) {
 
 //loading
 static void load(Window* window) {    
+  previous_question = -1;
+
   Layer *window_layer = window_get_root_layer(ui.window);
   GRect window_bounds = layer_get_bounds(window_layer);
   layer_set_update_proc(window_layer, bg_update_proc);

@@ -1,5 +1,6 @@
 #include <pebble.h>
 #include "kana_app_learn.h"
+#include "kana_app_glyphs.h"
 #include "kana_app_resources.h"
 #include "kana_app_simple_menu_color.h"
 
@@ -49,7 +50,7 @@ static void top_list_unload(Window* window) {
 static void details_list_load(Window* window) {
   for(int i=0; i<kana_app_getCharCount(selectedIndex); i++) {
     icons[i] = gbitmap_create_with_resource(kana_app_getHiraganaColRow( selectedIndex, i));
-    
+
     gbitmap_set_palette(icons[i], kana_app_bitmap_pallete, false);
   }
 
@@ -92,8 +93,6 @@ void kana_app_learn_init() {
             .load = top_list_load,
             .unload = top_list_unload
         });
-
-  
 
   //details list
   details_ui.window = window_create();
