@@ -4,12 +4,11 @@
 #include "kana_app_resources.h"
 #include "kana_app_glyphs.h"
 #include "kana_app_settings.h"
+#include "colors.h"
 
 #ifdef PBL_COLOR
-  #define BG_COLOR GColorVeryLightBlue
-  #define FG_COLOR GColorRichBrilliantLavender
-  #define SEC_FG_COLOR GColorRichBrilliantLavender
-  #define WRONG_ANSWER_COLOR GColorElectricUltramarine
+  #define FG_COLOR COLOR_TEXT
+  #define SEC_FG_COLOR COLOR_TEXT
 #endif
 #define GLYPH_DIMENSIONS 120
 
@@ -65,7 +64,7 @@ static struct Ui {
 
     GRect rect_bottom = bounds;
 
-    graphics_context_set_fill_color(ctx, BG_COLOR);
+    graphics_context_set_fill_color(ctx, COLOR_BG);
     graphics_fill_rect(ctx, rect_bottom, 0, GCornerNone);
   }
 #endif
@@ -371,10 +370,10 @@ void kana_app_quiz_init() {
 
   #ifdef PBL_COLOR
   kana_app_bitmap_pallete[0] = FG_COLOR;
-  kana_app_bitmap_pallete[1] = BG_COLOR;
+  kana_app_bitmap_pallete[1] = COLOR_BG;
 
   kana_app_bitmap_error_pallete[0] = WRONG_ANSWER_COLOR;
-  kana_app_bitmap_error_pallete[1] = BG_COLOR;
+  kana_app_bitmap_error_pallete[1] = COLOR_BG;
   #endif
 
   window_set_window_handlers(ui.window,
