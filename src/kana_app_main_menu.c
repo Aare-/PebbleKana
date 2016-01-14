@@ -3,6 +3,7 @@
 #include "kana_app_settings.h"
 #include "kana_app_learn.h"
 #include "kana_app_quiz.h"
+#include "colors.h"
 
 // - Start Quiz
 // - Learn Hiragana
@@ -91,8 +92,8 @@ static void load(Window* window) {
         });
 
     #ifdef PBL_COLOR
-        menu_layer_set_normal_colors(menu, GColorVeryLightBlue, GColorRichBrilliantLavender);
-        menu_layer_set_highlight_colors(menu, GColorRichBrilliantLavender, GColorWhite);    
+        menu_layer_set_normal_colors(menu, COLOR_BG, COLOR_TEXT);
+        menu_layer_set_highlight_colors(menu, COLOR_HIGHLIGHT, COLOR_HIGHLIGHT_TEXT);    
     #endif
 
     menu_layer_set_click_config_onto_window(menu, window);
