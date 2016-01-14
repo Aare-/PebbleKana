@@ -48,7 +48,7 @@ char *kana_app_rows_names[ALPHABET_ROW_NUM] =
 char *kana_app_romaji[ALPHABET_ROW_NUM][5] = 
   {{"A",  "I",   "U",   "E",  "O"},
    {"KA", "KI",  "KU",  "KE", "KO"},
-   {"SA", "SI",  "SU",  "SE", "SO"},
+   {"SA", "SHI",  "SU",  "SE", "SO"},
    {"TA", "CHI", "TSU", "TE", "TO"},   
    {"NA", "NI",  "NU",  "NE", "NO"},   
    {"HA", "HI",  "FU",  "HE", "HO"},
