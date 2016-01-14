@@ -3,6 +3,7 @@
 #include "kana_app_resources.h"
 #include "kana_app_simple_menu_color.h"
 #include "kana_app_simple_menu_color.h"
+#include "colors.h"
 
 static SimpleColorMenuLayer *simpleMenu;
 
@@ -58,8 +59,8 @@ void kana_app_settings_init() {
     #ifdef PBL_COLOR
         kana_app_simple_menu_set_color(
             simpleMenu,
-            GColorVeryLightBlue, GColorRichBrilliantLavender,
-            GColorRichBrilliantLavender, GColorWhite);
+            COLOR_BG, COLOR_TEXT,
+            COLOR_HIGHLIGHT, COLOR_HIGHLIGHT_TEXT);
     #endif
 }
 

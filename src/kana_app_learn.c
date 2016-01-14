@@ -3,6 +3,7 @@
 #include "kana_app_glyphs.h"
 #include "kana_app_resources.h"
 #include "kana_app_simple_menu_color.h"
+#include "colors.h"
 
 #ifdef PBL_COLOR
 extern GColor kana_app_bitmap_pallete[2];
@@ -40,8 +41,8 @@ static void top_list_load(Window* window) {
   #ifdef PBL_COLOR
   kana_app_simple_menu_set_color(
     ui.menu,
-    GColorVeryLightBlue, GColorRichBrilliantLavender,
-    GColorRichBrilliantLavender, GColorWhite);
+    COLOR_BG, COLOR_TEXT,
+    COLOR_HIGHLIGHT, COLOR_HIGHLIGHT_TEXT);
   #endif
 }
 
@@ -76,8 +77,8 @@ static void details_list_load(Window* window) {
   #ifdef PBL_COLOR
     kana_app_simple_menu_set_color(
       details_ui.menu,
-      GColorVeryLightBlue, GColorRichBrilliantLavender,
-      GColorRichBrilliantLavender, GColorWhite);
+      COLOR_BG, COLOR_TEXT,
+      COLOR_HIGHLIGHT, COLOR_HIGHLIGHT_TEXT);
   #endif
 }
 
