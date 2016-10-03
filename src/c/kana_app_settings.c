@@ -58,8 +58,8 @@ void kana_app_settings_init() {
     #ifdef PBL_COLOR
         kana_app_simple_menu_set_color(
             simpleMenu,
-            GColorVeryLightBlue, GColorRichBrilliantLavender,
-            GColorRichBrilliantLavender, GColorWhite);
+            GColorVeryLightBlue, GColorWhite,
+            GColorWhite, GColorVeryLightBlue);
     #endif
 }
 

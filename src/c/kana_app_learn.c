@@ -40,8 +40,8 @@ static void top_list_load(Window* window) {
   #ifdef PBL_COLOR
   kana_app_simple_menu_set_color(
     ui.menu,
-    GColorVeryLightBlue, GColorRichBrilliantLavender,
-    GColorRichBrilliantLavender, GColorWhite);
+    GColorVeryLightBlue, GColorWhite,
+     GColorWhite, GColorVeryLightBlue);
   #endif
 }
 
@@ -76,8 +76,8 @@ static void details_list_load(Window* window) {
   #ifdef PBL_COLOR
     kana_app_simple_menu_set_color(
       details_ui.menu,
-      GColorVeryLightBlue, GColorRichBrilliantLavender,
-      GColorRichBrilliantLavender, GColorWhite);
+      GColorBabyBlueEyes, GColorWhite,
+      GColorWhite, GColorVeryLightBlue);
   #endif
 }
 
@@ -96,6 +96,11 @@ void kana_app_learn_show() {
 }
 
 void kana_app_learn_init() {
+  #ifdef PBL_COLOR    
+  kana_app_bitmap_pallete[0] = GColorVeryLightBlue;
+  kana_app_bitmap_pallete[1] = GColorClear;
+  #endif
+  
   //top list
   ui.window = window_create();
   window_set_window_handlers(ui.window,

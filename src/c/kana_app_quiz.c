@@ -6,9 +6,9 @@
 #include "kana_app_settings.h"
 
 #ifdef PBL_COLOR
-  #define BG_COLOR GColorVeryLightBlue
-  #define FG_COLOR GColorRichBrilliantLavender
-  #define SEC_FG_COLOR GColorRichBrilliantLavender
+  #define BG_COLOR GColorOxfordBlue
+  #define FG_COLOR GColorWhite
+  #define SEC_FG_COLOR GColorWhite
   #define WRONG_ANSWER_COLOR GColorElectricUltramarine
 #endif
 #define GLYPH_DIMENSIONS 120

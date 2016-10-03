@@ -91,8 +91,8 @@ static void load(Window* window) {
         });
 
     #ifdef PBL_COLOR
-        menu_layer_set_normal_colors(menu, GColorVeryLightBlue, GColorRichBrilliantLavender);
-        menu_layer_set_highlight_colors(menu, GColorRichBrilliantLavender, GColorWhite);    
+        menu_layer_set_normal_colors(menu, GColorVeryLightBlue, GColorWhite);
+        menu_layer_set_highlight_colors(menu, GColorWhite, GColorVeryLightBlue);    
     #endif
 
     menu_layer_set_click_config_onto_window(menu, window);

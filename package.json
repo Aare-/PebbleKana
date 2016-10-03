@@ -1,0 +1,500 @@
+{
+    "author": "@FilipLoster",
+    "dependencies": {},
+    "keywords": [],
+    "name": "kanateacher",
+    "pebble": {
+        "displayName": "Kana Teacher",
+        "enableMultiJS": false,
+        "messageKeys": [],
+        "projectType": "native",
+        "resources": {
+            "media": [
+                {
+                    "file": "images/k_yu.png",
+                    "name": "K_YU",
+                    "type": "png"
+                },
+                {
+                    "file": "images/k_yo.png",
+                    "name": "K_YO",
+                    "type": "png"
+                },
+                {
+                    "file": "images/k_ya.png",
+                    "name": "K_YA",
+                    "type": "png"
+                },
+                {
+                    "file": "images/k_wo.png",
+                    "name": "K_WO",
+                    "type": "png"
+                },
+                {
+                    "file": "images/k_wa.png",
+                    "name": "K_WA",
+                    "type": "png"
+                },
+                {
+                    "file": "images/k_u.png",
+                    "name": "K_U",
+                    "type": "png"
+                },
+                {
+                    "file": "images/k_tsu.png",
+                    "name": "K_TSU",
+                    "type": "png"
+                },
+                {
+                    "file": "images/k_to.png",
+                    "name": "K_TO",
+                    "type": "png"
+                },
+                {
+                    "file": "images/k_te.png",
+                    "name": "K_TE",
+                    "type": "png"
+                },
+                {
+                    "file": "images/k_ta.png",
+                    "name": "K_TA",
+                    "type": "png"
+                },
+                {
+                    "file": "images/k_su.png",
+                    "name": "K_SU",
+                    "type": "png"
+                },
+                {
+                    "file": "images/k_so.png",
+                    "name": "K_SO",
+                    "type": "png"
+                },
+                {
+                    "file": "images/k_shi.png",
+                    "name": "K_SHI",
+                    "type": "png"
+                },
+                {
+                    "file": "images/k_se.png",
+                    "name": "K_SE",
+                    "type": "png"
+                },
+                {
+                    "file": "images/k_sa.png",
+                    "name": "K_SA",
+                    "type": "png"
+                },
+                {
+                    "file": "images/k_ru.png",
+                    "name": "K_RU",
+                    "type": "png"
+                },
+                {
+                    "file": "images/k_ro.png",
+                    "name": "K_RO",
+                    "type": "png"
+                },
+                {
+                    "file": "images/k_ri.png",
+                    "name": "K_RI",
+                    "type": "png"
+                },
+                {
+                    "file": "images/k_re.png",
+                    "name": "K_RE",
+                    "type": "png"
+                },
+                {
+                    "file": "images/k_ra.png",
+                    "name": "K_RA",
+                    "type": "png"
+                },
+                {
+                    "file": "images/k_o.png",
+                    "name": "K_O",
+                    "type": "png"
+                },
+                {
+                    "file": "images/k_nu.png",
+                    "name": "K_NU",
+                    "type": "png"
+                },
+                {
+                    "file": "images/k_no.png",
+                    "name": "K_NO",
+                    "type": "png"
+                },
+                {
+                    "file": "images/k_ni.png",
+                    "name": "K_NI",
+                    "type": "png"
+                },
+                {
+                    "file": "images/k_ne.png",
+                    "name": "K_NE",
+                    "type": "png"
+                },
+                {
+                    "file": "images/k_na.png",
+                    "name": "K_NA",
+                    "type": "png"
+                },
+                {
+                    "file": "images/k_n.png",
+                    "name": "K_N",
+                    "type": "png"
+                },
+                {
+                    "file": "images/k_mu.png",
+                    "name": "K_MU",
+                    "type": "png"
+                },
+                {
+                    "file": "images/k_mo.png",
+                    "name": "K_MO",
+                    "type": "png"
+                },
+                {
+                    "file": "images/k_mi.png",
+                    "name": "K_MI",
+                    "type": "png"
+                },
+                {
+                    "file": "images/k_me.png",
+                    "name": "K_ME",
+                    "type": "png"
+                },
+                {
+                    "file": "images/k_ma.png",
+                    "name": "K_MA",
+                    "type": "png"
+                },
+                {
+                    "file": "images/k_ku.png",
+                    "name": "K_KU",
+                    "type": "png"
+                },
+                {
+                    "file": "images/k_ko.png",
+                    "name": "K_KO",
+                    "type": "png"
+                },
+                {
+                    "file": "images/k_ki.png",
+                    "name": "K_KI",
+                    "type": "png"
+                },
+                {
+                    "file": "images/k_ke.png",
+                    "name": "K_KE",
+                    "type": "png"
+                },
+                {
+                    "file": "images/k_ka.png",
+                    "name": "K_KA",
+                    "type": "png"
+                },
+                {
+                    "file": "images/k_i.png",
+                    "name": "K_I",
+                    "type": "png"
+                },
+                {
+                    "file": "images/k_ho.png",
+                    "name": "K_HO",
+                    "type": "png"
+                },
+                {
+                    "file": "images/k_hi.png",
+                    "name": "K_HI",
+                    "type": "png"
+                },
+                {
+                    "file": "images/k_he.png",
+                    "name": "K_HE",
+                    "type": "png"
+                },
+                {
+                    "file": "images/k_ha.png",
+                    "name": "K_HA",
+                    "type": "png"
+                },
+                {
+                    "file": "images/k_fu.png",
+                    "name": "K_FU",
+                    "type": "png"
+                },
+                {
+                    "file": "images/k_e.png",
+                    "name": "K_E",
+                    "type": "png"
+                },
+                {
+                    "file": "images/k_chi.png",
+                    "name": "K_CHI",
+                    "type": "png"
+                },
+                {
+                    "file": "images/k_a.png",
+                    "name": "K_A",
+                    "type": "png"
+                },
+                {
+                    "file": "images/h_yu.png",
+                    "name": "H_YU",
+                    "type": "png"
+                },
+                {
+                    "file": "images/h_yo.png",
+                    "name": "H_YO",
+                    "type": "png"
+                },
+                {
+                    "file": "images/h_ya.png",
+                    "name": "H_YA",
+                    "type": "png"
+                },
+                {
+                    "file": "images/h_wo.png",
+                    "name": "H_WO",
+                    "type": "png"
+                },
+                {
+                    "file": "images/h_wa.png",
+                    "name": "H_WA",
+                    "type": "png"
+                },
+                {
+                    "file": "images/h_u.png",
+                    "name": "H_U",
+                    "type": "png"
+                },
+                {
+                    "file": "images/h_tsu.png",
+                    "name": "H_TSU",
+                    "type": "png"
+                },
+                {
+                    "file": "images/h_to.png",
+                    "name": "H_TO",
+                    "type": "png"
+                },
+                {
+                    "file": "images/h_te.png",
+                    "name": "H_TE",
+                    "type": "png"
+                },
+                {
+                    "file": "images/h_ta.png",
+                    "name": "H_TA",
+                    "type": "png"
+                },
+                {
+                    "file": "images/h_su.png",
+                    "name": "H_SU",
+                    "type": "png"
+                },
+                {
+                    "file": "images/h_so.png",
+                    "name": "H_SO",
+                    "type": "png"
+                },
+                {
+                    "file": "images/h_shi.png",
+                    "name": "H_SHI",
+                    "type": "png"
+                },
+                {
+                    "file": "images/h_se.png",
+                    "name": "H_SE",
+                    "type": "png"
+                },
+                {
+                    "file": "images/h_sa.png",
+                    "name": "H_SA",
+                    "type": "png"
+                },
+                {
+                    "file": "images/h_ru.png",
+                    "name": "H_RU",
+                    "type": "png"
+                },
+                {
+                    "file": "images/h_ro.png",
+                    "name": "H_RO",
+                    "type": "png"
+                },
+                {
+                    "file": "images/h_ri.png",
+                    "name": "H_RI",
+                    "type": "png"
+                },
+                {
+                    "file": "images/h_re.png",
+                    "name": "H_RE",
+                    "type": "png"
+                },
+                {
+                    "file": "images/h_ra.png",
+                    "name": "H_RA",
+                    "type": "png"
+                },
+                {
+                    "file": "images/h_o.png",
+                    "name": "H_O",
+                    "type": "png"
+                },
+                {
+                    "file": "images/h_nu.png",
+                    "name": "H_NU",
+                    "type": "png"
+                },
+                {
+                    "file": "images/h_no.png",
+                    "name": "H_NO",
+                    "type": "png"
+                },
+                {
+                    "file": "images/h_ni.png",
+                    "name": "H_NI",
+                    "type": "png"
+                },
+                {
+                    "file": "images/h_ne.png",
+                    "name": "H_NE",
+                    "type": "png"
+                },
+                {
+                    "file": "images/h_na.png",
+                    "name": "H_NA",
+                    "type": "png"
+                },
+                {
+                    "file": "images/h_n.png",
+                    "name": "H_N",
+                    "type": "png"
+                },
+                {
+                    "file": "images/h_mu.png",
+                    "name": "H_MU",
+                    "type": "png"
+                },
+                {
+                    "file": "images/h_mo.png",
+                    "name": "H_MO",
+                    "type": "png"
+                },
+                {
+                    "file": "images/h_mi.png",
+                    "name": "H_MI",
+                    "type": "png"
+                },
+                {
+                    "file": "images/h_me.png",
+                    "name": "H_ME",
+                    "type": "png"
+                },
+                {
+                    "file": "images/h_ma.png",
+                    "name": "H_MA",
+                    "type": "png"
+                },
+                {
+                    "file": "images/h_ku.png",
+                    "name": "H_KU",
+                    "type": "png"
+                },
+                {
+                    "file": "images/h_ko.png",
+                    "name": "H_KO",
+                    "type": "png"
+                },
+                {
+                    "file": "images/h_ki.png",
+                    "name": "H_KI",
+                    "type": "png"
+                },
+                {
+                    "file": "images/h_ke.png",
+                    "name": "H_KE",
+                    "type": "png"
+                },
+                {
+                    "file": "images/h_ka.png",
+                    "name": "H_KA",
+                    "type": "png"
+                },
+                {
+                    "file": "images/h_i.png",
+                    "name": "H_I",
+                    "type": "png"
+                },
+                {
+                    "file": "images/h_ho.png",
+                    "name": "H_HO",
+                    "type": "png"
+                },
+                {
+                    "file": "images/h_hi.png",
+                    "name": "H_HI",
+                    "type": "png"
+                },
+                {
+                    "file": "images/h_he.png",
+                    "name": "H_HE",
+                    "type": "png"
+                },
+                {
+                    "file": "images/h_ha.png",
+                    "name": "H_HA",
+                    "type": "png"
+                },
+                {
+                    "file": "images/h_fu.png",
+                    "name": "H_FU",
+                    "type": "png"
+                },
+                {
+                    "file": "images/h_e.png",
+                    "name": "H_E",
+                    "type": "png"
+                },
+                {
+                    "file": "images/h_chi.png",
+                    "name": "H_CHI",
+                    "type": "png"
+                },
+                {
+                    "file": "images/h_a.png",
+                    "name": "H_A",
+                    "type": "png"
+                },
+                {
+                    "file": "images/kana_ico.png",
+                    "menuIcon": true,
+                    "name": "ICO",
+                    "targetPlatforms": null,
+                    "type": "png"
+                },
+                {
+                    "file": "images/fuji.png",
+                    "name": "FUJI",
+                    "type": "png"
+                }
+            ]
+        },
+        "sdkVersion": "3",
+        "targetPlatforms": [
+            "aplite",
+            "basalt",
+            "chalk",
+            "diorite"
+        ],
+        "uuid": "79ebaf81-7968-4a3f-ac70-b832e5645ea2",
+        "watchapp": {
+            "watchface": false
+        }
+    },
+    "version": "1.0.0"
+}
